@@ -1,26 +1,276 @@
+/* ─── GiantzFly Exim LLP — Design System ─── */
+/* OKLCH color space — logo colors: dark navy #0D2B55, mid blue #1E5FA8, light blue #7BB8E0 */
+
 @import "tailwindcss";
 
+/* ─── DESIGN TOKENS ─── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ── LOGO-EXACT COLORS ── */
+  --navy:        oklch(22% 0.07 255);    /* #0D2B55 — dark navy, headlines, borders */
+  --navy-muted:  oklch(35% 0.08 255);   /* slightly lighter navy — secondary text */
+  --navy-faint:  oklch(50% 0.07 255);   /* tertiary / labels */
+
+  --blue:        oklch(43% 0.13 255);   /* #1E5FA8 — mid blue, CTA, links */
+  --blue-light:  oklch(72% 0.10 240);   /* #7BB8E0 — light accent, highlights */
+  --blue-dim:    oklch(72% 0.10 240 / 0.15); /* alpha tints for borders/glows */
+  --blue-wash:   oklch(72% 0.10 240 / 0.08); /* very subtle bg tints */
+
+  /* ── SURFACES — all light, no dark ── */
+  --bg:          oklch(97% 0.005 255);  /* #F5F7FA — page background */
+  --bg-2:        oklch(94% 0.006 255);  /* slightly darker surface */
+  --bg-card:     oklch(99% 0.002 255);  /* card / panel white */
+  --border:      oklch(22% 0.07 255 / 0.12); /* navy alpha border */
+  --border-light: oklch(22% 0.07 255 / 0.06);
+
+  /* ── SEMANTIC ALIASES (used throughout components) ── */
+  /* These replace the old saffron/surface-0 tokens — map to blue palette */
+  --ink:         var(--navy);
+  --ink-muted:   var(--navy-muted);
+  --ink-faint:   var(--navy-faint);
+
+  --porcelain:   var(--bg);
+  --porcelain-2: var(--bg-2);
+
+  --saffron:     var(--blue);          /* primary accent = mid blue */
+  --turmeric:    var(--navy);          /* deep accent = navy */
+  --saffron-dim: var(--blue-dim);
+
+  --surface-0:   var(--navy);          /* was darkest dark — now navy */
+  --surface-1:   var(--bg-2);          /* was dark card — now light card */
+  --surface-2:   oklch(91% 0.007 255); /* elevated surface */
+  --surface-border: var(--border);
+
+  /* ── TYPOGRAPHY SCALE — clamp() only ── */
+  --text-xs:    clamp(0.625rem, 0.6rem + 0.13vw, 0.75rem);
+  --text-sm:    clamp(0.75rem,  0.72rem + 0.17vw, 0.875rem);
+  --text-base:  clamp(0.875rem, 0.84rem + 0.2vw,  1rem);
+  --text-md:    clamp(1rem,     0.95rem + 0.26vw, 1.125rem);
+  --text-lg:    clamp(1.125rem, 1.05rem + 0.38vw, 1.375rem);
+  --text-xl:    clamp(1.375rem, 1.2rem + 0.88vw,  1.875rem);
+  --text-2xl:   clamp(1.875rem, 1.5rem + 1.88vw,  2.75rem);
+  --text-3xl:   clamp(2.75rem,  2rem + 3.75vw,    4.5rem);
+  --text-4xl:   clamp(4rem,     2.5rem + 7.5vw,   7rem);
+  --text-display: clamp(5rem,   3rem + 10vw,       9rem);
+
+  /* ── SPACING ── */
+  --section-tight:    clamp(3rem, 2rem + 5vw, 6rem);
+  --section-normal:   clamp(5rem, 3rem + 8vw, 10rem);
+  --section-generous: clamp(8rem, 5rem + 12vw, 16rem);
+
+  /* ── MOTION ── */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-expo:  cubic-bezier(0.7, 0, 1, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast:      200ms;
+  --duration-normal:    400ms;
+  --duration-slow:      700ms;
+  --duration-cinematic: 1200ms;
+
+  /* ── SEMANTIC ── */
+  --color-error: oklch(58% 0.22 25);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* ─── BASE RESET ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Cabinet Grotesk', system-ui, sans-serif;
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--navy);
+  background-color: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* NO dark mode — [data-theme="dark"] overridden to stay light */
+[data-theme="dark"] {
+  color: var(--navy);
+  background-color: var(--bg-2);
+}
+
+/* ─── TYPOGRAPHY ─── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Boska', Georgia, serif;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.display {
+  font-family: 'Boska', Georgia, serif;
+  font-size: var(--text-display);
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+}
+
+.heading-xl { font-size: var(--text-4xl); }
+.heading-lg { font-size: var(--text-3xl); }
+.heading-md { font-size: var(--text-2xl); }
+.heading-sm { font-size: var(--text-xl); }
+
+.label {
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ─── LAYOUT ─── */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 1rem + 2vw, 4rem);
+}
+
+.container-narrow {
+  max-width: 900px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 1rem + 2vw, 4rem);
+}
+
+.section-tight    { padding-block: var(--section-tight); }
+.section-normal   { padding-block: var(--section-normal); }
+.section-generous { padding-block: var(--section-generous); }
+
+/* ─── INTERACTIVE ─── */
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+img, video { display: block; max-width: 100%; }
+
+/* ─── BUTTONS ─── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: var(--blue);
+  color: var(--bg);
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 2px solid transparent;
+  transition: background var(--duration-fast) var(--ease-standard),
+              transform var(--duration-fast) var(--ease-standard);
+}
+
+.btn-primary:hover {
+  background: var(--navy);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: transparent;
+  color: var(--navy);
+  font-family: 'Cabinet Grotesk', sans-serif;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 2px solid var(--border);
+  transition: border-color var(--duration-fast) var(--ease-standard),
+              color var(--duration-fast) var(--ease-standard),
+              transform var(--duration-fast) var(--ease-standard);
+}
+
+.btn-ghost:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+  transform: translateY(-2px);
+}
+
+.btn-ghost-dark {
+  color: var(--navy);
+  border-color: var(--border);
+}
+
+.btn-ghost-dark:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+/* ─── CARD ─── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  transition: transform var(--duration-normal) var(--ease-out-expo),
+              box-shadow var(--duration-normal) var(--ease-out-expo);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px var(--navy) / 0.1;
+}
+
+/* ─── FOCUS ─── */
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+/* ─── REDUCED MOTION ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-2); }
+::-webkit-scrollbar-thumb { background: var(--blue-dim); border-radius: 3px; }
+
+/* ─── SELECTION ─── */
+::selection {
+  background: var(--blue-light);
+  color: var(--navy);
+}
+
+/* ─── UTILITIES ─── */
+.animate-ready { will-change: transform, opacity; }
+.clip-reveal { clip-path: inset(0 0 100% 0); }
+
+/* ─── MOBILE ─── */
+@media (max-width: 900px) {
+  [style*="grid-template-columns: 1.4fr 1fr"],
+  [style*="grid-template-columns: 1fr 1.4fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 640px) {
+  [style*="grid-template-columns: 1.2fr 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+  [style*="grid-template-columns: 1fr auto"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (hover: none) {
+  .product-cta-overlay { opacity: 1 !important; transform: translateY(0) !important; }
+  .btn-primary:hover, .btn-ghost:hover { transform: none; }
+  .btn-primary:active, .btn-ghost:active { opacity: 0.85; }
+}
+
+@media print {
+  .hero-corner, [class*="FloatingCTA"], header { display: none !important; }
 }
