@@ -92,7 +92,7 @@ function TiltCard({ product, priority = false }) {
           </div>
 
           <div style={{ position: "absolute", bottom: "0.75rem", left: "0.875rem", zIndex: 3 }}>
-            <span className="label" style={{ color: "oklch(22% 0.07 255 / 0.45)", fontSize: "8px" }}>{product.origin}</span>
+            <span className="label" style={{ color: "oklch(97% 0.005 255 / 0.7)", fontSize: "8px" }}>{product.origin}</span>
           </div>
         </div>
 
@@ -101,7 +101,7 @@ function TiltCard({ product, priority = false }) {
           <p style={{ fontFamily: "'Boska', Georgia, serif", fontSize: "var(--text-xl)", fontWeight: 700, letterSpacing: "-0.02em", color: "oklch(22% 0.07 255)", lineHeight: 1.1, marginBottom: "0.2rem" }}>
             {product.name}
           </p>
-          <p style={{ fontFamily: "'Cabinet Grotesk', sans-serif", fontSize: "var(--text-xs)", color: "oklch(97% 0.008 85 / 0.38)", marginBottom: "1rem" }}>
+          <p style={{ fontFamily: "'Cabinet Grotesk', sans-serif", fontSize: "var(--text-xs)", color: "oklch(50% 0.07 255 / 0.6)", marginBottom: "1rem" }}>
             {product.grade}
           </p>
 
@@ -136,7 +136,7 @@ function TiltCard({ product, priority = false }) {
               style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "0.6rem 1.25rem", background: "oklch(11% 0.012 58 / 0.9)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)", borderTop: "1px solid oklch(72% 0.18 68 / 0.3)", display: "flex", gap: "0.4rem", flexWrap: "wrap" }}
             >
               {product.certifications.slice(0, 4).map(c => (
-                <span key={c} className="label" style={{ fontSize: "8px", color: "oklch(43% 0.13 255)", padding: "0.15rem 0.5rem", border: "1px solid oklch(72% 0.18 68 / 0.35)" }}>{c}</span>
+                <span key={c} className="label" style={{ fontSize: "8px", color: "oklch(72% 0.10 240)", padding: "0.15rem 0.5rem", border: "1px solid oklch(72% 0.10 240 / 0.4)" }}>{c}</span>
               ))}
             </motion.div>
           )}
@@ -193,7 +193,7 @@ export default function CategoryPage({ params }) {
   }, []);
 
   return (
-    <main style={{ background: "oklch(22% 0.07 255)" }}>
+    <main style={{ background: "var(--bg)" }}>
 
       {/* Cinematic hero */}
       <div style={{ position: "relative", height: "100svh", overflow: "hidden", background: "oklch(97% 0.005 255)" }} data-theme="light">
@@ -203,12 +203,12 @@ export default function CategoryPage({ params }) {
         </div>
 
         <div className="container" style={{ position: "relative", zIndex: 5, height: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-end", paddingBottom: "clamp(4rem, 7vw, 8rem)" }}>
-          <p className="cat-hero-sub label" style={{ color: "oklch(22% 0.07 255 / 0.45)", marginBottom: "2rem", opacity: 0 }}>
+          <p className="cat-hero-sub label" style={{ color: "oklch(97% 0.005 255 / 0.55)", marginBottom: "2rem", opacity: 0 }}>
             <Link href="/products" style={{ color: "inherit" }}>Products</Link>
             <span style={{ margin: "0 0.75rem" }}>→</span>
             {category.name}
           </p>
-          <h1 style={{ fontFamily: "'Boska', Georgia, serif", fontSize: "var(--text-display)", fontWeight: 900, letterSpacing: "-0.05em", lineHeight: 0.85, color: "oklch(22% 0.07 255)", marginBottom: "2rem" }}>
+          <h1 style={{ fontFamily: "'Boska', Georgia, serif", fontSize: "var(--text-display)", fontWeight: 900, letterSpacing: "-0.05em", lineHeight: 0.85, color: "oklch(97% 0.005 255)", marginBottom: "2rem" }}>
             {category.name.toUpperCase().split("").map((ch, i) => (
               <span key={i} style={{ display: ch === " " ? "inline" : "inline-block", overflow: ch === " " ? "visible" : "hidden" }}>
                 <span className="cat-hero-word" style={{ display: "inline-block" }}>{ch === " " ? " " : ch}</span>
@@ -216,19 +216,19 @@ export default function CategoryPage({ params }) {
             ))}
           </h1>
           <div className="cat-hero-sub" style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", flexWrap: "wrap", gap: "1.5rem", opacity: 0 }}>
-            <p style={{ fontFamily: "'Cabinet Grotesk', sans-serif", fontSize: "var(--text-md)", color: "oklch(22% 0.07 255 / 0.6)", maxWidth: "55ch", lineHeight: 1.6 }}>
+            <p style={{ fontFamily: "'Cabinet Grotesk', sans-serif", fontSize: "var(--text-md)", color: "oklch(97% 0.005 255 / 0.7)", maxWidth: "55ch", lineHeight: 1.6 }}>
               {category.tagline}
             </p>
             <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
               {allProducts[0]?.certifications?.slice(0, 3).map(c => (
-                <span key={c} className="label" style={{ padding: "0.3rem 0.75rem", border: "1px solid oklch(22% 0.07 255 / 0.15)", color: "oklch(22% 0.07 255 / 0.5)", fontSize: "9px" }}>{c}</span>
+                <span key={c} className="label" style={{ padding: "0.3rem 0.75rem", border: "1px solid oklch(97% 0.005 255 / 0.3)", color: "oklch(97% 0.005 255 / 0.75)", fontSize: "9px" }}>{c}</span>
               ))}
             </div>
           </div>
         </div>
 
         <div style={{ position: "absolute", bottom: "clamp(2rem, 4vw, 4rem)", right: "clamp(1.5rem, 4vw, 6rem)", zIndex: 5 }}>
-          <span style={{ fontFamily: "'Boska', Georgia, serif", fontSize: "var(--text-display)", fontWeight: 900, color: "oklch(22% 0.07 255 / 0.05)", letterSpacing: "-0.05em" }}>
+          <span style={{ fontFamily: "'Boska', Georgia, serif", fontSize: "var(--text-display)", fontWeight: 900, color: "oklch(97% 0.005 255 / 0.07)", letterSpacing: "-0.05em" }}>
             {String(allProducts.length).padStart(2, "0")}
           </span>
         </div>

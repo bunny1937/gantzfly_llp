@@ -1,11 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    cpus: 2,
-  },
-  turbopack: {
-    root: "C:/Users/bhava/Ecommerce-git/giantzfly_llp",
-  },
+  experimental: {},
   images: {
     remotePatterns: [
       {

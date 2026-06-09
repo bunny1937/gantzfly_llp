@@ -28,6 +28,9 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
           href="https://api.fontshare.com/v2/css?f[]=boska@400,400i,500,700,900&f[]=cabinet-grotesk@300,400,500,600,700,800&display=swap"
         />
+        {/* Preload showcase product images */}
+        <link rel="preload" as="image" href="https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=1800&q=80&fit=crop" />
+        <link rel="preload" as="image" href="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=1800&q=80&fit=crop" />
       </head>
       <body>
         <CartProvider>

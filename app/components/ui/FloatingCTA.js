@@ -9,7 +9,8 @@ export default function FloatingCTA() {
 
   useEffect(() => {
     // Show after scrolled past hero
-    const onScroll = () => setVisible(window.scrollY > window.innerHeight * 0.5);
+    const onScroll = () =>
+      setVisible(window.scrollY > window.innerHeight * 0.5);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -30,7 +31,7 @@ export default function FloatingCTA() {
         gap: "0.75rem",
         padding: "0.875rem 1.5rem",
         background: "var(--saffron)",
-        color: "var(--ink)",
+        color: "var(--bg)",
         fontFamily: "'Cabinet Grotesk', sans-serif",
         fontSize: "var(--text-xs)",
         fontWeight: 800,

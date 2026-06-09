@@ -119,7 +119,7 @@ function StackCard({ slide, i, progress, total }) {
           transformOrigin: "top center",
           top: `${i * 28}px`,
           position: "relative",
-          width: "min(92vw, 1200px)",
+          width: "min(92vw, 1400px)",
           height: "min(82vh, 680px)",
           overflow: "hidden",
           background: slide.cardBg,
@@ -144,7 +144,8 @@ function StackCard({ slide, i, progress, total }) {
               fill
               sizes="50vw"
               style={{ objectFit: "cover", objectPosition: slide.bgPos }}
-              priority={i === 0}
+              priority={i < 2}
+              loading={i < 2 ? "eager" : "lazy"}
             />
           </motion.div>
 
@@ -185,71 +186,72 @@ function StackCard({ slide, i, progress, total }) {
           style={{
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-between",
-            padding: "clamp(2rem, 4vw, 4rem)",
+            padding: "clamp(2rem, 2vw, 2rem)",
+            height: "100%",
+            overflow: "hidden",
           }}
         >
-          {/* Top */}
-          <div>
-            <span
-              className="label"
-              style={{
-                color: slide.color,
-                letterSpacing: "0.2em",
-                marginBottom: "clamp(1.5rem, 3vw, 3rem)",
-                display: "block",
-              }}
-            >
-              {slide.tag}
-            </span>
-            <h2
-              style={{
-                fontFamily: "'Boska', Georgia, serif",
-                fontSize: "clamp(2.5rem, 5vw, 5rem)",
-                fontWeight: 900,
-                letterSpacing: "-0.04em",
-                lineHeight: 0.9,
-                color: "var(--porcelain)",
-                marginBottom: "1rem",
-              }}
-            >
-              {slide.title}
-            </h2>
-            <p
-              style={{
-                fontFamily: "'Boska', Georgia, serif",
-                fontSize: "var(--text-xl)",
-                fontWeight: 500,
-                fontStyle: "italic",
-                color: slide.color,
-                marginBottom: "clamp(1rem, 2vw, 2rem)",
-                letterSpacing: "-0.01em",
-              }}
-            >
-              {slide.headline}
-            </p>
-            <p
-              style={{
-                fontFamily: "'Cabinet Grotesk', sans-serif",
-                fontSize: "var(--text-md)",
-                color: "oklch(97% 0.008 85 / 0.6)",
-                lineHeight: 1.65,
-                maxWidth: "44ch",
-              }}
-            >
-              {slide.copy}
-            </p>
-          </div>
+          {/* Scrollable content area */}
+          <div style={{ flex: 1, overflow: "auto", marginBottom: "2rem" }}>
+            <div>
+              <span
+                className="label"
+                style={{
+                  color: slide.color,
+                  letterSpacing: "0.2em",
+                  marginBottom: "clamp(1rem, 2vw, 2rem)",
+                  display: "block",
+                }}
+              >
+                {slide.tag}
+              </span>
+              <h2
+                style={{
+                  fontFamily: "'Boska', Georgia, serif",
+                  fontSize: "clamp(2rem, 4vw, 4rem)",
+                  fontWeight: 900,
+                  letterSpacing: "-0.04em",
+                  lineHeight: 0.9,
+                  color: "var(--porcelain)",
+                  marginBottom: ".5rem",
+                }}
+              >
+                {slide.title}
+              </h2>
+              <p
+                style={{
+                  fontFamily: "'Boska', Georgia, serif",
+                  fontSize: "var(--text-lg)",
+                  fontWeight: 500,
+                  fontStyle: "italic",
+                  color: slide.color,
+                  marginBottom: "clamp(1rem, 1vw, 1rem)",
+                  letterSpacing: "-0.01em",
+                }}
+              >
+                {slide.headline}
+              </p>
+              <p
+                style={{
+                  fontFamily: "'Cabinet Grotesk', sans-serif",
+                  fontSize: "var(--text-md)",
+                  color: "oklch(97% 0.008 85 / 0.6)",
+                  lineHeight: 1.65,
+                  maxWidth: "44ch",
+                  marginBottom: "2rem",
+                }}
+              >
+                {slide.copy}
+              </p>
+            </div>
 
-          {/* Specs table — 2×2 grid */}
-          <div>
+            {/* Specs table — 2×2 grid */}
             <div
               style={{
                 display: "grid",
                 gridTemplateColumns: "1fr 1fr",
                 gap: "1px",
                 background: "oklch(100% 0 0 / 0.06)",
-                marginBottom: "2rem",
               }}
             >
               {slide.specs.map(([label, val]) => (
@@ -283,27 +285,28 @@ function StackCard({ slide, i, progress, total }) {
                 </div>
               ))}
             </div>
+          </div>
 
-            <div style={{ display: "flex", gap: "1rem" }}>
-              <Link
-                href="/cart"
-                className="btn-primary"
-                style={{ fontSize: "var(--text-xs)" }}
-              >
-                Add to Enquiry
-              </Link>
-              <Link
-                href={`/products`}
-                className="btn-ghost"
-                style={{
-                  fontSize: "var(--text-xs)",
-                  color: "var(--porcelain)",
-                  borderColor: "oklch(100% 0 0 / 0.15)",
-                }}
-              >
-                View All
-              </Link>
-            </div>
+          {/* Buttons — fixed at bottom, always visible */}
+          <div style={{ display: "flex", gap: "1rem", flexShrink: 0 }}>
+            <Link
+              href="/cart"
+              className="btn-primary"
+              style={{ fontSize: "var(--text-xs)" }}
+            >
+              Add to Enquiry
+            </Link>
+            <Link
+              href={`/products`}
+              className="btn-ghost"
+              style={{
+                fontSize: "var(--text-xs)",
+                color: "var(--porcelain)",
+                borderColor: "oklch(100% 0 0 / 0.15)",
+              }}
+            >
+              View All
+            </Link>
           </div>
         </div>
       </motion.div>
@@ -327,6 +330,7 @@ export default function ProductShowcase() {
         background: "var(--bg)",
         /* Each card = 100vh, +1 for breathing room */
         minHeight: `${(SLIDES.length + 0.5) * 100}vh`,
+        paddingBottom: "4rem",
       }}
       aria-label="Product showcase"
     >

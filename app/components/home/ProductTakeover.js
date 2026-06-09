@@ -4,26 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useScrollReveal } from "../../hooks/useScrollReveal";
 
-/* Featured product — Turmeric Finger (highest visibility, best narrative) */
-const FEATURED = {
-  name: "TURMERIC",
-  subtitle: "Finger — Premium Export Grade",
-  origin: "Erode, Tamil Nadu",
-  statement:
-    "The global benchmark for curcumin content. Processed to EU Organic and USDA standards — ready for your private-label spice line.",
-  moq: "5 MT",
-  specs: [
-    { label: "Curcumin", value: "> 3.5%" },
-    { label: "ASTA Colour", value: "25+" },
-    { label: "Moisture", value: "< 10%" },
-    { label: "HS Code", value: "0910.30" },
-  ],
-  certs: ["FSSAI", "APEDA", "USDA Organic"],
-  href: "/products/spices/turmeric-finger-premium",
-  image:
-    "https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=1400&q=80&fit=crop",
-};
-
 export default function ProductTakeover() {
   const labelRef = useRef(null);
   const nameRef = useRef(null);
@@ -179,7 +159,7 @@ export default function ProductTakeover() {
                     fontFamily: "'Cabinet Grotesk', sans-serif",
                     fontSize: "var(--text-md)",
                     fontWeight: 600,
-                    color: "var(--porcelain)",
+                    color: "var(--navy)",
                   }}
                 >
                   {value}

@@ -140,7 +140,7 @@ function StatCard({ stat }) {
           fontFamily: "'Cabinet Grotesk', sans-serif",
           fontSize: "var(--text-md)",
           fontWeight: 600,
-          color: "var(--porcelain)",
+          color: "var(--navy)",
           marginBottom: "0.4rem",
         }}
       >
@@ -193,7 +193,7 @@ export default function ProofRoom() {
       data-theme="dark"
       style={{
         background: "var(--bg)",
-        paddingBlock: "var(--section-generous)",
+        paddingBlock: "var(--section-normal)",
       }}
       aria-label="Proof — export credentials and stats"
     >
@@ -223,7 +223,7 @@ export default function ProofRoom() {
                 fontSize: "var(--text-3xl)",
                 fontWeight: 700,
                 letterSpacing: "-0.03em",
-                color: "var(--porcelain)",
+                color: "var(--navy)",
                 lineHeight: 1,
               }}
             >
@@ -298,7 +298,7 @@ export default function ProofRoom() {
               >
                 <p
                   className="label"
-                  style={{ color: "var(--porcelain)", letterSpacing: "0.1em" }}
+                  style={{ color: "var(--navy)", letterSpacing: "0.1em" }}
                 >
                   {name}
                 </p>

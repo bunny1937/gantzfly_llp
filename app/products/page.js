@@ -9,11 +9,15 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   CATEGORIES,
   PRODUCTS,
   getProductsByCategory,
 } from "../../lib/products";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const PRODUCT_IMAGES = {
   "turmeric-finger-premium":
@@ -210,7 +214,7 @@ function ProductCard({ product, priority = false }) {
             >
               <span
                 className="label"
-                style={{ color: "oklch(22% 0.07 255 / 0.5)", fontSize: "8px" }}
+                style={{ color: "oklch(97% 0.005 255 / 0.7)", fontSize: "8px" }}
               >
                 {product.origin}
               </span>
@@ -269,7 +273,7 @@ function ProductCard({ product, priority = false }) {
                   <span
                     className="label"
                     style={{
-                      color: "oklch(22% 0.07 255 / 0.3)",
+                      color: "var(--navy)",
                       fontSize: "8px",
                       letterSpacing: "0.14em",
                     }}
@@ -364,9 +368,9 @@ function ProductCard({ product, priority = false }) {
                     className="label"
                     style={{
                       fontSize: "8px",
-                      color: catColor,
+                      color: "oklch(72% 0.10 240)",
                       padding: "0.15rem 0.5rem",
-                      border: `1px solid ${catColor}`,
+                      border: "1px solid oklch(72% 0.10 240 / 0.4)",
                     }}
                   >
                     {c}
@@ -400,11 +404,7 @@ function CategorySection({ category, catIndex }) {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let ctx;
-    const init = async () => {
-      const { gsap } = await import("gsap");
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      gsap.registerPlugin(ScrollTrigger);
-      if (!headRef.current) return;
+    if (headRef.current) {
       ctx = gsap.context(() => {
         gsap.fromTo(
           headRef.current,
@@ -433,8 +433,7 @@ function CategorySection({ category, catIndex }) {
           },
         );
       });
-    };
-    init();
+    }
     return () => ctx?.revert();
   }, [category.id]);
 
@@ -515,13 +514,12 @@ function CategorySection({ category, catIndex }) {
 
 export default function ProductsPage() {
   const heroRef = useRef(null);
+  // const [bgMode, setBgMode] = useState("wash");
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let ctx;
-    const init = async () => {
-      const { gsap } = await import("gsap");
-      if (!heroRef.current) return;
+    if (heroRef.current) {
       ctx = gsap.context(() => {
         gsap.fromTo(
           ".archive-word",
@@ -547,88 +545,230 @@ export default function ProductsPage() {
           },
         );
       }, heroRef);
-    };
-    init();
+    }
     return () => ctx?.revert();
   }, []);
 
   return (
-    <main style={{ paddingTop: "clamp(6rem, 10vw, 10rem)" }}>
+    <main>
       <div className="container">
         <div
           ref={heroRef}
           style={{
-            paddingBottom: "clamp(3rem, 6vw, 7rem)",
+            position: "relative",
+            isolation: "isolate",
+            paddingTop: "clamp(4rem, 16vw, 14rem)",
             borderBottom: "1px solid oklch(22% 0.07 255 / 0.08)",
+            minHeight: "calc(100vh - 8rem)",
+            display: "grid",
+            gridTemplateColumns:
+              typeof window !== "undefined" && window.innerWidth < 980
+                ? "1fr"
+                : "minmax(0, 1.35fr) minmax(280px, 0.65fr)",
+            columnGap: "clamp(2rem, 6vw, 6rem)",
+            rowGap: "2rem",
+            alignItems: "end",
+            overflow: "hidden",
           }}
         >
-          <p
-            className="archive-sub label"
-            style={{
-              color: "oklch(43% 0.13 255)",
-              marginBottom: "1.5rem",
-              letterSpacing: "0.2em",
-              opacity: 0,
-            }}
-          >
-            Export Catalog — {PRODUCTS.length} Products · {CATEGORIES.length}{" "}
-            Categories
-          </p>
-          <h1
-            style={{
-              fontFamily: "'Boska', Georgia, serif",
-              fontSize: "var(--text-display)",
-              fontWeight: 900,
-              letterSpacing: "-0.05em",
-              lineHeight: 0.85,
-              color: "oklch(22% 0.07 255)",
-            }}
-          >
-            {["THE", "ARCHIVE."].map((word, i) => (
-              <span key={i} style={{ display: "block", overflow: "hidden" }}>
-                <span className="archive-word" style={{ display: "block" }}>
-                  {word}
-                </span>
-              </span>
-            ))}
-          </h1>
           <div
-            className="archive-sub"
+            aria-hidden="true"
             style={{
-              display: "flex",
-              gap: "clamp(2rem, 4vw, 5rem)",
-              marginTop: "3rem",
-              flexWrap: "wrap",
-              opacity: 0,
+              position: "absolute",
+              inset: 0,
+              pointerEvents: "none",
+              overflow: "hidden",
+              zIndex: 0,
             }}
           >
-            {[
-              ["3", "Categories"],
-              [String(PRODUCTS.length), "Products"],
-              ["15+", "Years Export"],
-              ["3", "Continents"],
-            ].map(([num, label]) => (
-              <div key={label}>
-                <p
-                  style={{
-                    fontFamily: "'Boska', Georgia, serif",
-                    fontSize: "var(--text-3xl)",
-                    fontWeight: 900,
-                    letterSpacing: "-0.04em",
-                    color: "oklch(22% 0.07 255)",
-                    lineHeight: 1,
-                  }}
-                >
-                  {num}
-                </p>
-                <p
-                  className="label"
-                  style={{ color: "oklch(50% 0.07 255)", marginTop: "0.4rem" }}
-                >
-                  {label}
-                </p>
-              </div>
-            ))}
+            <motion.div
+              initial={{ y: 0 }}
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              style={{
+                position: "absolute",
+                right: "-2%",
+                top: "6%",
+                width: "clamp(18rem, 28vw, 26rem)",
+                aspectRatio: "4 / 5",
+                borderRadius: "2rem",
+                overflow: "hidden",
+                boxShadow: "0 30px 90px rgba(15,35,69,0.18)",
+                rotate: "-8deg",
+                opacity: 0.98,
+              }}
+            >
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  backgroundImage:
+                    "url('https://images.unsplash.com/photo-1615485500704-8e990f9900f7?auto=format&fit=crop&w=1400&q=80')",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ y: 0 }}
+              animate={{ y: [0, -12, 0] }}
+              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+              style={{
+                position: "absolute",
+                right: "19%",
+                bottom: "8%",
+                width: "clamp(14rem, 21vw, 19rem)",
+                aspectRatio: "1 / 1.12",
+                borderRadius: "1.6rem",
+                overflow: "hidden",
+                boxShadow: "0 22px 70px rgba(15,35,69,0.14)",
+                rotate: "6deg",
+                opacity: 0.96,
+              }}
+            >
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  backgroundImage:
+                    "url('https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=1200&q=80')",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ y: 0 }}
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+              style={{
+                position: "absolute",
+                right: "7%",
+                bottom: "1%",
+                width: "clamp(12rem, 18vw, 16rem)",
+                aspectRatio: "1 / 1.24",
+                borderRadius: "1.35rem",
+                overflow: "hidden",
+                boxShadow: "0 18px 54px rgba(15,35,69,0.12)",
+                rotate: "-5deg",
+                opacity: 0.9,
+                display:
+                  typeof window !== "undefined" && window.innerWidth < 980
+                    ? "none"
+                    : "block",
+              }}
+            >
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  backgroundImage:
+                    "url('https://images.unsplash.com/photo-1508747703725-719777637510?auto=format&fit=crop&w=1200&q=80')",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+              />
+            </motion.div>
+
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background:
+                  "linear-gradient(90deg, rgba(247,249,252,0.1) 0%, rgba(247,249,252,0.95) 34%, rgba(247,249,252,0.22) 58%, rgba(247,249,252,0.28) 78%, rgba(247,249,252,0.01) 100%)",
+              }}
+            />
+
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                background: "transparent",
+              }}
+            />
+          </div>
+
+          <div style={{ minWidth: 0, position: "relative", zIndex: 1 }}>
+            <p
+              className="archive-sub label"
+              style={{
+                color: "oklch(43% 0.13 255)",
+                marginBottom: "1.5rem",
+                letterSpacing: "0.2em",
+                opacity: 0,
+              }}
+            >
+              Export Catalog — {PRODUCTS.length} Products · {CATEGORIES.length}{" "}
+              Categories
+            </p>
+
+            <h1
+              style={{
+                fontFamily: "'Boska', Georgia, serif",
+                fontSize: "clamp(4.5rem, 8vw, 8rem)",
+                fontWeight: 900,
+                letterSpacing: "-0.055em",
+                lineHeight: 0.84,
+                color: "oklch(22% 0.07 255)",
+                maxWidth: "11ch",
+              }}
+            >
+              {["OUR", "PRODUCTS"].map((word, i) => (
+                <span key={i} style={{ display: "block", overflow: "hidden" }}>
+                  <span className="archive-word" style={{ display: "block" }}>
+                    {word}
+                  </span>
+                </span>
+              ))}
+            </h1>
+
+            <div
+              className="archive-sub"
+              style={{
+                display: "grid",
+                gridTemplateColumns:
+                  typeof window !== "undefined" && window.innerWidth < 768
+                    ? "repeat(2, minmax(0, 1fr))"
+                    : "repeat(4, minmax(0, 1fr))",
+                gap: "clamp(1rem, 2vw, 2.5rem)",
+                marginTop: "3rem",
+                maxWidth: "56rem",
+                opacity: 0,
+              }}
+            >
+              {[
+                ["3", "Categories"],
+                [String(PRODUCTS.length), "Products"],
+                ["15+", "Years Export"],
+                ["3", "Continents"],
+              ].map(([num, label]) => (
+                <div key={label}>
+                  <p
+                    style={{
+                      fontFamily: "'Boska', Georgia, serif",
+                      fontSize: "var(--text-3xl)",
+                      fontWeight: 900,
+                      letterSpacing: "-0.04em",
+                      color: "oklch(22% 0.07 255)",
+                      lineHeight: 1,
+                    }}
+                  >
+                    {num}
+                  </p>
+                  <p
+                    className="label"
+                    style={{
+                      color: "oklch(50% 0.07 255)",
+                      marginTop: "0.4rem",
+                    }}
+                  >
+                    {label}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

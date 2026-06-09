@@ -17,7 +17,7 @@ export default function QuoteCTA() {
       data-theme="dark"
       style={{
         background: "var(--bg)",
-        paddingBlock: "var(--section-generous)",
+        paddingBlock: "var(--section-tight)",
         position: "relative",
         overflow: "hidden",
       }}
@@ -34,7 +34,7 @@ export default function QuoteCTA() {
           fontSize: "clamp(8rem, 20vw, 22rem)",
           fontWeight: 900,
           letterSpacing: "-0.06em",
-          color: "oklch(97% 0.008 85 / 0.025)",
+          color: "oklch(22% 0.07 255 / 0.04)",
           lineHeight: 1,
           userSelect: "none",
           pointerEvents: "none",
@@ -61,7 +61,7 @@ export default function QuoteCTA() {
             fontWeight: 900,
             letterSpacing: "-0.04em",
             lineHeight: 0.95,
-            color: "var(--porcelain)",
+            color: "var(--navy)",
             marginBottom: "2rem",
             maxWidth: "18ch",
           }}
@@ -78,7 +78,7 @@ export default function QuoteCTA() {
             style={{
               fontFamily: "'Cabinet Grotesk', sans-serif",
               fontSize: "var(--text-lg)",
-              color: "oklch(97% 0.008 85 / 0.6)",
+              color: "var(--navy-muted)",
               lineHeight: 1.6,
               maxWidth: "52ch",
               marginBottom: "clamp(2rem, 3vw, 4rem)",

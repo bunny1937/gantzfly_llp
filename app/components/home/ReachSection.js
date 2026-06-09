@@ -44,13 +44,12 @@ export default function ReachSection() {
     <section
       style={{
         background: "var(--porcelain)",
-        paddingBlock: "var(--section-generous)",
+        paddingBlock: "var(--section-tight)",
         overflow: "hidden",
       }}
       aria-label="Export reach"
     >
       <div className="container">
-
         {/* Asymmetric 1fr / 1.4fr grid */}
         <div
           style={{
@@ -94,9 +93,8 @@ export default function ReachSection() {
                 maxWidth: "42ch",
               }}
             >
-              From Nhava Sheva port, we ship to distributors,
-              supermarket chains, and private-label brands across
-              three continents.
+              From Nhava Sheva port, we ship to distributors, supermarket
+              chains, and private-label brands across three continents.
             </p>
 
             {/* Port detail — operational */}
@@ -108,7 +106,10 @@ export default function ReachSection() {
                 background: "oklch(14% 0.015 60 / 0.03)",
               }}
             >
-              <p className="label" style={{ color: "var(--ink-faint)", marginBottom: "0.5rem" }}>
+              <p
+                className="label"
+                style={{ color: "var(--ink-faint)", marginBottom: "0.5rem" }}
+              >
                 Port of Loading
               </p>
               <p
@@ -157,10 +158,16 @@ export default function ReachSection() {
                     background: "var(--porcelain)",
                     transition: "background 200ms",
                   }}
-                  onMouseEnter={(e) => (e.currentTarget.style.background = "var(--porcelain-2)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.background = "var(--porcelain)")}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.background = "var(--porcelain-2)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.background = "var(--porcelain)")
+                  }
                 >
-                  <span style={{ fontSize: "1.5rem" }} aria-hidden="true">{flag}</span>
+                  <span style={{ fontSize: "1.5rem" }} aria-hidden="true">
+                    {flag}
+                  </span>
                   <div>
                     <p
                       style={{
@@ -186,7 +193,9 @@ export default function ReachSection() {
                   <span
                     className="label"
                     style={{
-                      color: active ? "oklch(72% 0.18 142)" : "var(--ink-faint)",
+                      color: active
+                        ? "oklch(72% 0.18 142)"
+                        : "var(--ink-faint)",
                       letterSpacing: "0.1em",
                     }}
                   >
