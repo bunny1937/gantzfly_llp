@@ -16,7 +16,7 @@
 # next.js
 /.next/
 /out/
-.claude
+
 # production
 /build
 
@@ -37,5 +37,14 @@ yarn-error.log*
 .vercel
 
 # typescript
+.claude
 *.tsbuildinfo
 next-env.d.ts
+                                                 
+AWWWARDS_DESIGN_BIBLE.md                                     
+CLAUDE.md                                                    
+creative-bento-grid-layouts-geometric-shapes-compositions-trendy-ui-frame-template-modern-card-tiles-brutal-shape-pattern-web-comics-grids-vector-set_229548-5106.avif                 
+DEBUG_SMART.txt                                               
+giantzfly-project-docs.html   
+next-dev.log                     
+SKILLS.md                                                    

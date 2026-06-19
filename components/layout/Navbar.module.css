@@ -1,0 +1,210 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  min-height: var(--nav-height);
+  border-bottom: 1px solid var(--border);
+  background: oklch(99% 0.002 255 / 0.92);
+  backdrop-filter: blur(10px);
+}
+
+.inner {
+  width: min(var(--content-wide), calc(100% - 2rem));
+  min-height: var(--nav-height);
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  justify-content: space-between;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--navy);
+  flex-shrink: 0;
+}
+
+.logoText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.logoMain {
+  font-family: var(--font-display);
+  font-size: 1.28rem;
+}
+
+.logoSub {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--blue);
+}
+
+.desktopNav {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.link {
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--navy-muted);
+}
+
+.link:hover {
+  background: var(--blue-wash);
+  color: var(--navy);
+}
+
+.active {
+  color: var(--navy);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.quoteBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-md);
+  color: var(--text-inverse);
+  background: var(--navy);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.quoteBtn:hover {
+  background: var(--navy-muted);
+}
+
+.badge {
+  min-width: 18px;
+  height: 18px;
+  padding-inline: 5px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: var(--radius-full);
+  background: var(--blue-light);
+  color: var(--navy);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.menuToggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+}
+
+.menuToggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  margin: 3px auto;
+  background: var(--navy);
+  border-radius: 999px;
+}
+
+.mobileMenu {
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.mobileInner {
+  width: min(var(--content-wide), calc(100% - 2rem));
+  margin-inline: auto;
+  padding-block: var(--space-4);
+  display: grid;
+  gap: var(--space-2);
+}
+
+.mobileLink,
+.mobileCTA {
+  display: block;
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius-md);
+  font-size: var(--text-base);
+}
+
+.mobileLink {
+  color: var(--navy);
+  border: 1px solid var(--border-light);
+}
+
+.mobileCTA {
+  color: var(--text-inverse);
+  background: var(--navy);
+}
+
+.activeMobile {
+  background: var(--blue-wash);
+}
+
+@media (max-width: 860px) {
+  .desktopNav {
+    display: none;
+  }
+
+  .menuToggle {
+    display: inline-block;
+  }
+}
+@media (max-width: 360px) {
+  .inner {
+    gap: var(--space-3);
+  }
+  .logoMain {
+    font-size: 1.05rem;
+  }
+  .quoteBtn {
+    padding: 0.7rem 0.8rem;
+    font-size: var(--text-xs);
+  }
+}
+@media (max-width: 220px) {
+  .logoSub {
+    display: none;
+  }
+  .logoMain {
+    font-size: 0.95rem;
+  }
+  .menuToggle {
+    width: 40px;
+    height: 40px;
+  }
+}
+@media (max-width: 180px) {
+  .logoMain {
+    font-size: 0.85rem;
+  }
+  .menuToggle {
+    width: 34px;
+    height: 34px;
+  }
+  .inner {
+    gap: var(--space-2);
+  }
+  .quoteBtn {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.7rem;
+    min-height: 36px;
+  }
+}

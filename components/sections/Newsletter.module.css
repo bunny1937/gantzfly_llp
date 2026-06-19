@@ -1,0 +1,527 @@
+/* =====================================================================
+   Newsletter.module.css
+   Scoped styles for components/sections/Newsletter.tsx.
+   - Replaces all former inline styles.
+   - Strict, per-element responsive ladder 960 -> 180px.
+   Tokens (--space-*, --text-*, colors) come from globals.
+   ===================================================================== */
+
+/* ---------- Base (desktop) ---------- */
+.newsletter {
+  background: var(--navy);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+.eyebrowLight {
+  color: var(--blue-light);
+}
+
+.heading {
+  margin-top: var(--space-3);
+  font-size: var(--text-2xl);
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.lead {
+  margin-top: var(--space-4);
+  font-size: var(--text-base);
+  color: oklch(85% 0.02 250);
+  line-height: 1.75;
+  max-width: 52ch;
+}
+
+.bulletList {
+  margin-top: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.bulletItem {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.bulletDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--blue-light);
+  margin-top: 8px;
+  flex-shrink: 0;
+}
+
+.bulletText {
+  font-size: var(--text-sm);
+  color: oklch(80% 0.02 250);
+}
+
+.formCard {
+  padding: var(--space-8);
+  background: oklch(100% 0 0 / 0.05);
+  border: 1px solid oklch(100% 0 0 / 0.12);
+}
+
+.successBox {
+  text-align: center;
+  padding: var(--space-8) 0;
+}
+
+.successMark {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-4);
+}
+
+.successTitle {
+  font-size: var(--text-xl);
+  color: #fff;
+  margin-bottom: var(--space-3);
+}
+
+.successText {
+  font-size: var(--text-sm);
+  color: oklch(80% 0.02 250);
+}
+
+.form {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.formEyebrow {
+  margin-bottom: var(--space-3);
+}
+
+.formIntro {
+  font-size: var(--text-sm);
+  color: oklch(75% 0.02 250);
+  line-height: 1.6;
+}
+
+.labelLight {
+  color: oklch(85% 0.02 250);
+}
+
+.inputDark {
+  background: oklch(100% 0 0 / 0.07);
+  border-color: oklch(100% 0 0 / 0.15);
+  color: #fff;
+}
+
+.textareaDark {
+  min-height: 80px;
+}
+
+.optional {
+  font-weight: 400;
+  opacity: 0.6;
+}
+
+.errorText {
+  font-size: var(--text-sm);
+  color: var(--color-error, #ff6b6b);
+}
+
+.submitBtn {
+  width: 100%;
+  justify-content: center;
+}
+
+.disclaimer {
+  font-size: var(--text-xs);
+  color: oklch(65% 0.02 250);
+  line-height: 1.6;
+}
+
+/* =====================================================================
+   Responsive ladder — explicit per-element values
+   960 / 860 / 768 / 680 / 600 / 540 / 480 / 420 / 380 / 340 / 300 /
+   260 / 220 / 180
+   ===================================================================== */
+
+@media (max-width: 960px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+  .formCard {
+    padding: 1.75rem;
+  }
+  .heading {
+    font-size: 1.7rem;
+  }
+  .successTitle {
+    font-size: 1.35rem;
+  }
+  .lead {
+    font-size: 1rem;
+  }
+  .bulletText,
+  .formIntro,
+  .successText,
+  .errorText {
+    font-size: 0.95rem;
+  }
+  .successMark {
+    font-size: 2.3rem;
+  }
+}
+
+@media (max-width: 860px) {
+  .grid {
+    gap: 2.5rem;
+  }
+  .formCard {
+    padding: 1.6rem;
+  }
+  .heading {
+    font-size: 1.6rem;
+  }
+  .successTitle {
+    font-size: 1.3rem;
+  }
+  .lead {
+    font-size: 0.99rem;
+  }
+  .bulletText,
+  .formIntro,
+  .successText,
+  .errorText {
+    font-size: 0.93rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    gap: 2rem;
+  }
+  .formCard {
+    padding: 1.5rem;
+  }
+  .heading {
+    font-size: 1.5rem;
+  }
+  .successTitle {
+    font-size: 1.24rem;
+  }
+  .lead {
+    font-size: 0.98rem;
+  }
+  .bulletText,
+  .formIntro,
+  .successText,
+  .errorText {
+    font-size: 0.92rem;
+  }
+  .successMark {
+    font-size: 2.1rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .grid {
+    gap: 1.85rem;
+  }
+  .formCard {
+    padding: 1.4rem;
+  }
+  .heading {
+    font-size: 1.42rem;
+  }
+  .successTitle {
+    font-size: 1.18rem;
+  }
+  .lead {
+    font-size: 0.97rem;
+  }
+  .bulletText,
+  .formIntro,
+  .successText,
+  .errorText {
+    font-size: 0.91rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    gap: 1.75rem;
+  }
+  .formCard {
+    padding: 1.3rem;
+  }
+  .heading {
+    font-size: 1.35rem;
+  }
+  .successTitle {
+    font-size: 1.14rem;
+  }
+  .lead {
+    font-size: 0.96rem;
+  }
+  .bulletText,
+  .formIntro,
+  .successText,
+  .errorText {
+    font-size: 0.9rem;
+  }
+  .successMark {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .grid {
+    gap: 1.5rem;
+  }
+  .formCard {
+    padding: 1.2rem;
+  }
+  .heading {
+    font-size: 1.28rem;
+  }
+  .successTitle {
+    font-size: 1.1rem;
+  }
+  .lead {
+    font-size: 0.95rem;
+  }
+  .bulletText,
+  .formIntro,
+  .successText,
+  .errorText {
+    font-size: 0.89rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    gap: 1.3rem;
+  }
+  .formCard {
+    padding: 1.1rem;
+  }
+  .heading {
+    font-size: 1.22rem;
+  }
+  .successTitle {
+    font-size: 1.06rem;
+  }
+  .lead {
+    font-size: 0.93rem;
+  }
+  .bulletText,
+  .formIntro,
+  .successText,
+  .errorText {
+    font-size: 0.88rem;
+  }
+  .successMark {
+    font-size: 1.8rem;
+  }
+  .disclaimer {
+    font-size: 0.72rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .grid {
+    gap: 1.2rem;
+  }
+  .formCard {
+    padding: 1rem;
+  }
+  .heading {
+    font-size: 1.16rem;
+  }
+  .successTitle {
+    font-size: 1.02rem;
+  }
+  .lead {
+    font-size: 0.92rem;
+  }
+  .bulletText,
+  .formIntro,
+  .successText,
+  .errorText {
+    font-size: 0.87rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .grid {
+    gap: 1.1rem;
+  }
+  .formCard {
+    padding: 0.95rem;
+  }
+  .heading {
+    font-size: 1.1rem;
+  }
+  .successTitle {
+    font-size: 0.99rem;
+  }
+  .lead {
+    font-size: 0.9rem;
+  }
+  .bulletText,
+  .formIntro,
+  .successText,
+  .errorText {
+    font-size: 0.86rem;
+  }
+  .successMark {
+    font-size: 1.6rem;
+  }
+  .disclaimer {
+    font-size: 0.7rem;
+  }
+  .bulletDot {
+    margin-top: 7px;
+  }
+}
+
+@media (max-width: 340px) {
+  .grid {
+    gap: 1rem;
+  }
+  .formCard {
+    padding: 0.9rem;
+  }
+  .heading {
+    font-size: 1.05rem;
+  }
+  .successTitle {
+    font-size: 0.96rem;
+  }
+  .lead {
+    font-size: 0.89rem;
+  }
+  .bulletText,
+  .formIntro,
+  .successText,
+  .errorText {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 300px) {
+  .grid {
+    gap: 0.95rem;
+  }
+  .formCard {
+    padding: 0.85rem;
+  }
+  .heading {
+    font-size: 1rem;
+  }
+  .successTitle {
+    font-size: 0.93rem;
+  }
+  .lead {
+    font-size: 0.88rem;
+  }
+  .bulletText,
+  .formIntro,
+  .successText,
+  .errorText {
+    font-size: 0.84rem;
+  }
+  .successMark {
+    font-size: 1.4rem;
+  }
+  .disclaimer {
+    font-size: 0.68rem;
+  }
+}
+
+@media (max-width: 260px) {
+  .grid {
+    gap: 0.85rem;
+  }
+  .formCard {
+    padding: 0.8rem;
+  }
+  .heading {
+    font-size: 0.96rem;
+  }
+  .successTitle {
+    font-size: 0.9rem;
+  }
+  .lead {
+    font-size: 0.87rem;
+  }
+  .bulletText,
+  .formIntro,
+  .successText,
+  .errorText {
+    font-size: 0.83rem;
+  }
+}
+
+@media (max-width: 220px) {
+  .grid {
+    gap: 0.8rem;
+  }
+  .formCard {
+    padding: 0.75rem;
+  }
+  .heading {
+    font-size: 0.92rem;
+  }
+  .successTitle {
+    font-size: 0.88rem;
+  }
+  .lead {
+    font-size: 0.86rem;
+  }
+  .bulletText,
+  .formIntro,
+  .successText,
+  .errorText {
+    font-size: 0.82rem;
+  }
+  .successMark {
+    font-size: 1.2rem;
+  }
+  .disclaimer {
+    font-size: 0.66rem;
+  }
+}
+
+@media (max-width: 180px) {
+  .grid {
+    gap: 0.7rem;
+  }
+  .formCard {
+    padding: 0.7rem;
+  }
+  .heading {
+    font-size: 0.88rem;
+  }
+  .successTitle {
+    font-size: 0.85rem;
+  }
+  .lead {
+    font-size: 0.84rem;
+  }
+  .bulletText,
+  .formIntro,
+  .successText,
+  .errorText {
+    font-size: 0.8rem;
+  }
+  .successMark {
+    font-size: 1.1rem;
+  }
+  .disclaimer {
+    font-size: 0.64rem;
+  }
+}
