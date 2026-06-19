@@ -167,7 +167,7 @@ export default function ContactPage() {
                   >
                     Location
                   </p>
-                  <p className="text-muted">Udaipur, Rajasthan, India</p>
+                  <p className="text-muted">Sindhudurg, Kudal, India</p>
                 </div>
                 <div>
                   <p

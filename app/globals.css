@@ -610,8 +610,8 @@ li {
   color: var(--blue);
 }
 
-.kicker:nth-child(2) {
-  margin-top: 0;
+.kicker:nth-child(1) {
+  margin-top: 5rem;
 }
 
 .form-group,

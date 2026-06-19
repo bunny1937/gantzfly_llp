@@ -3,7 +3,7 @@ import { useState } from "react";
 import styles from "./Newsletter.module.css";
 
 export default function Newsletter() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ name: "", company: "", email: "", message: "" });
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
@@ -115,6 +115,25 @@ export default function Newsletter() {
               <div className="form-group">
                 <label
                   className={`form-label ${styles.labelLight}`}
+                  htmlFor="nl-company"
+                >
+                  Company / Organisation{" "}
+                  <span className={styles.optional}>(optional)</span>
+                </label>
+                <input
+                  id="nl-company"
+                  className={`form-input ${styles.inputDark}`}
+                  placeholder="Acme Imports Ltd."
+                  value={form.company}
+                  onChange={(e) =>
+                    setForm((p) => ({ ...p, company: e.target.value }))
+                  }
+                />
+              </div>
+
+              <div className="form-group">
+                <label
+                  className={`form-label ${styles.labelLight}`}
                   htmlFor="nl-email"
                 >
                   Business Email
@@ -160,7 +179,7 @@ export default function Newsletter() {
                 className={`btn btn--primary btn--lg ${styles.submitBtn}`}
                 disabled={status === "loading"}
               >
-                {status === "loading" ? "Submitting…" : "Join Trade List →"}
+                {status === "loading" ? "Submitting…" : "Join →"}
               </button>
 
               <p className={styles.disclaimer}>

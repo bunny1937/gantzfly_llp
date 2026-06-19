@@ -2,9 +2,28 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useQuoteCart } from "@/context/QuoteCartContext";
+import { auth, googleProvider } from "@/lib/firebase";
+import { signInWithCredential, onAuthStateChanged, signOut } from "firebase/auth";
+import { GoogleAuthProvider } from "firebase/auth";
 import styles from "./Navbar.module.css";
+
+const ADMIN_EMAIL = "giantzflyexim@gmail.com";
+
+declare global {
+  interface Window {
+    google?: {
+      accounts: {
+        id: {
+          initialize: (cfg: object) => void;
+          prompt: () => void;
+          cancel: () => void;
+        };
+      };
+    };
+  }
+}
 
 const navLinks = [
   { href: "/products", label: "Products" },
@@ -16,6 +35,69 @@ export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const { totalItems } = useQuoteCart();
+  const [isAdmin, setIsAdmin] = useState(false);
+  const logoClicksRef = useRef<number[]>([]);
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+      setIsAdmin(user?.email === ADMIN_EMAIL);
+    });
+    return unsub;
+  }, []);
+
+  useEffect(() => {
+    const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
+    if (!clientId) return;
+
+    const script = document.createElement("script");
+    script.src = "https://accounts.google.com/gsi/client";
+    script.async = true;
+    script.defer = true;
+    script.onload = () => {
+      window.google?.accounts.id.initialize({
+        client_id: clientId,
+        callback: async (response: { credential: string }) => {
+          try {
+            const credential = GoogleAuthProvider.credential(response.credential);
+            await signInWithCredential(auth, credential);
+          } catch {
+            // wrong account or cancelled — silent
+          }
+        },
+        auto_select: true,
+        cancel_on_tap_outside: true,
+        itp_support: true,
+        // no .prompt() — silent only, no popup for regular users
+      });
+    };
+    document.head.appendChild(script);
+
+    return () => {
+      window.google?.accounts.id.cancel();
+      document.head.removeChild(script);
+    };
+  }, []);
+
+  const handleLogoClick = useCallback(async () => {
+    if (isAdmin) return;
+    const now = Date.now();
+    logoClicksRef.current = [...logoClicksRef.current, now].filter(
+      (t) => now - t < 2000,
+    );
+    if (logoClicksRef.current.length >= 5) {
+      logoClicksRef.current = [];
+      try {
+        const { signInWithPopup } = await import("firebase/auth");
+        await signInWithPopup(auth, googleProvider);
+      } catch {
+        // cancelled — silent
+      }
+    }
+  }, [isAdmin]);
+
+  const handleAdminSignOut = useCallback(async () => {
+    await signOut(auth);
+  }, []);
 
   return (
     <header className={styles.header}>
@@ -24,6 +106,7 @@ export default function Navbar() {
           href="/"
           className={styles.logo}
           aria-label="GiantzFly Exim LLP home"
+          onClick={handleLogoClick}
         >
           <svg
             width="34"
@@ -77,6 +160,19 @@ export default function Navbar() {
               {item.label}
             </Link>
           ))}
+          {isAdmin && (
+            <>
+              <Link href="/admin/reviews" className={`${styles.link} ${styles.adminLink}`}>
+                Reviews
+              </Link>
+              <Link href="/studio" className={`${styles.link} ${styles.adminLink}`}>
+                Studio
+              </Link>
+              <button className={styles.adminSignOut} onClick={handleAdminSignOut} type="button">
+                Sign out
+              </button>
+            </>
+          )}
         </nav>
 
         <div className={styles.actions}>
@@ -120,6 +216,19 @@ export default function Navbar() {
             >
               Quote Cart {totalItems > 0 ? `(${totalItems})` : ""}
             </Link>
+            {isAdmin && (
+              <>
+                <Link href="/admin/reviews" className={styles.mobileLink} onClick={() => setOpen(false)}>
+                  Reviews (Admin)
+                </Link>
+                <Link href="/studio" className={styles.mobileLink} onClick={() => setOpen(false)}>
+                  Sanity Studio
+                </Link>
+                <button className={`${styles.mobileLink} ${styles.adminSignOut}`} onClick={handleAdminSignOut} type="button">
+                  Sign out
+                </button>
+              </>
+            )}
           </div>
         </div>
       )}

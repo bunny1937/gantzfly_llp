@@ -1,5 +1,10 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/navigation";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/lib/firebase";
+
+const ADMIN_EMAIL = "giantzflyexim@gmail.com";
 
 interface PendingReview {
   id: string;
@@ -13,108 +18,60 @@ interface PendingReview {
 }
 
 export default function AdminReviewsPage() {
-  const [authed, setAuthed] = useState(false);
-  const [password, setPassword] = useState("");
+  const router = useRouter();
+  const [ready, setReady] = useState(false);
   const [reviews, setReviews] = useState<PendingReview[]>([]);
   const [loading, setLoading] = useState(false);
   const [actionMsg, setActionMsg] = useState("");
-  const [secret, setSecret] = useState("");
 
-  async function handleLogin(e: React.FormEvent) {
-    e.preventDefault();
-
-    const adminSecret = password.trim();
-    if (!adminSecret) return;
-
-    setSecret(adminSecret);
-    setAuthed(true);
-    await fetchPending(adminSecret);
-  }
-
-  const fetchPending = async (adminSecret: string) => {
-    setLoading(true);
-
-    const res = await fetch("/api/admin/pending-reviews", {
-      headers: { Authorization: `Bearer ${adminSecret}` },
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+      if (!user || user.email !== ADMIN_EMAIL) {
+        router.replace("/");
+        return;
+      }
+      setReady(true);
+      fetchPending(user);
     });
+    return unsub;
+  }, [router]);
 
+  const fetchPending = async (user: import("firebase/auth").User) => {
+    setLoading(true);
+    const token = await user.getIdToken();
+    const res = await fetch("/api/admin/pending-reviews", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     if (res.ok) {
       const data = await res.json();
       setReviews(data.reviews);
     }
-
     setLoading(false);
   };
 
-  async function handleAction(reviewId: string, action: "approve" | "reject") {
+  const handleAction = useCallback(async (reviewId: string, action: "approve" | "reject") => {
     setActionMsg("");
-
+    const user = auth.currentUser;
+    if (!user) return;
+    const token = await user.getIdToken();
     const res = await fetch("/api/admin/approve-review", {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${secret}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ reviewId, action }),
     });
-
     const data = await res.json();
-
     if (data.success) {
-      setActionMsg(
-        `${action === "approve" ? "✓ Approved" : "✗ Rejected"}: ${reviewId}`,
-      );
-      await fetchPending(secret);
+      setActionMsg(`${action === "approve" ? "✓ Approved" : "✗ Rejected"}: ${reviewId}`);
+      if (auth.currentUser) fetchPending(auth.currentUser);
     } else {
-      setActionMsg("Error — check your secret key.");
+      setActionMsg("Error — try again.");
     }
-  }
+  }, []);
 
-  if (!authed) {
-    return (
-      <section className="section">
-        <div
-          className="container"
-          style={{ maxWidth: 400, margin: "80px auto" }}
-        >
-          <div className="card" style={{ padding: "var(--space-8)" }}>
-            <p className="eyebrow">Admin</p>
-            <h1
-              style={{
-                fontSize: "var(--text-xl)",
-                marginTop: "var(--space-3)",
-                marginBottom: "var(--space-6)",
-              }}
-            >
-              Review Moderation
-            </h1>
-            <form
-              onSubmit={handleLogin}
-              style={{ display: "grid", gap: "var(--space-4)" }}
-            >
-              <div className="form-group">
-                <label className="form-label" htmlFor="admin-pass">
-                  Admin Secret
-                </label>
-                <input
-                  id="admin-pass"
-                  type="password"
-                  className="form-input"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter your ADMIN_SECRET"
-                  required
-                />
-              </div>
-              <button type="submit" className="btn btn--primary btn--lg">
-                Enter
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
-    );
-  }
+  if (!ready) return null;
 
   return (
     <section className="section">
@@ -178,13 +135,7 @@ export default function AdminReviewsPage() {
                     gap: "var(--space-4)",
                   }}
                 >
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "var(--space-3)",
-                      alignItems: "center",
-                    }}
-                  >
+                  <div style={{ display: "flex", gap: "var(--space-3)", alignItems: "center" }}>
                     {r.photo ? (
                       <img
                         src={r.photo}
@@ -215,36 +166,17 @@ export default function AdminReviewsPage() {
                       </div>
                     )}
                     <div>
-                      <p
-                        style={{
-                          margin: 0,
-                          fontWeight: 700,
-                          color: "var(--navy)",
-                          fontSize: "var(--text-sm)",
-                        }}
-                      >
+                      <p style={{ margin: 0, fontWeight: 700, color: "var(--navy)", fontSize: "var(--text-sm)" }}>
                         {r.name}
                       </p>
-                      <p
-                        style={{
-                          margin: 0,
-                          fontSize: "var(--text-xs)",
-                          color: "var(--text-muted)",
-                        }}
-                      >
+                      <p style={{ margin: 0, fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>
                         {[r.company, r.country].filter(Boolean).join(" · ")}
                       </p>
                     </div>
                   </div>
                   <div style={{ display: "flex", gap: 2 }}>
                     {[1, 2, 3, 4, 5].map((s) => (
-                      <span
-                        key={s}
-                        style={{
-                          fontSize: "1.1rem",
-                          color: s <= r.rating ? "#d19900" : "var(--border)",
-                        }}
-                      >
+                      <span key={s} style={{ fontSize: "1.1rem", color: s <= r.rating ? "#d19900" : "var(--border)" }}>
                         ★
                       </span>
                     ))}
@@ -265,18 +197,8 @@ export default function AdminReviewsPage() {
                   {r.text}
                 </p>
 
-                <div
-                  style={{
-                    display: "flex",
-                    gap: "var(--space-3)",
-                    alignItems: "center",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <button
-                    className="btn btn--primary"
-                    onClick={() => handleAction(r.id, "approve")}
-                  >
+                <div style={{ display: "flex", gap: "var(--space-3)", alignItems: "center", flexWrap: "wrap" }}>
+                  <button className="btn btn--primary" onClick={() => handleAction(r.id, "approve")}>
                     ✓ Approve
                   </button>
                   <button
@@ -286,13 +208,7 @@ export default function AdminReviewsPage() {
                   >
                     ✗ Reject
                   </button>
-                  <span
-                    style={{
-                      fontSize: "var(--text-xs)",
-                      color: "var(--text-faint)",
-                      marginLeft: "auto",
-                    }}
-                  >
+                  <span style={{ fontSize: "var(--text-xs)", color: "var(--text-faint)", marginLeft: "auto" }}>
                     Doc ID: {r.id}
                   </span>
                 </div>

@@ -1,39 +1,36 @@
 import { NextRequest, NextResponse } from "next/server";
-import { initializeApp, getApps, cert } from "firebase-admin/app";
-import { getFirestore } from "firebase-admin/firestore";
+import { getAdminDb, getAdminAuth } from "@/lib/firebase-admin";
 
-// Initialize Firebase Admin (server-side only)
-if (!getApps().length) {
-  initializeApp({
-    credential: cert({
-      projectId: process.env.FIREBASE_PROJECT_ID,
-      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-      privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-    }),
-  });
+export const dynamic = "force-dynamic";
+
+const ADMIN_EMAIL = "giantzflyexim@gmail.com";
+
+async function verifyAdmin(req: NextRequest): Promise<boolean> {
+  const token = req.headers.get("authorization")?.replace("Bearer ", "");
+  if (!token) return false;
+  try {
+    const decoded = await getAdminAuth().verifyIdToken(token);
+    return decoded.email === ADMIN_EMAIL;
+  } catch {
+    return false;
+  }
 }
 
-const adminDb = getFirestore();
-
 export async function POST(req: NextRequest) {
-  const authHeader = req.headers.get("authorization");
-
-  // Simple secret header check — only you know this key
-  if (authHeader !== `Bearer ${process.env.ADMIN_SECRET}`) {
+  if (!(await verifyAdmin(req))) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const { reviewId, action } = await req.json(); // action: 'approve' | 'reject'
+  const { reviewId, action } = await req.json();
 
   if (!reviewId) {
     return NextResponse.json({ error: "reviewId required" }, { status: 400 });
   }
 
+  const adminDb = getAdminDb();
+
   if (action === "approve") {
-    await adminDb
-      .collection("reviews")
-      .doc(reviewId)
-      .update({ approved: true });
+    await adminDb.collection("reviews").doc(reviewId).update({ approved: true });
     return NextResponse.json({ success: true, status: "approved" });
   }
 
