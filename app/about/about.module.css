@@ -1,0 +1,220 @@
+.page {
+  --ink: #101c31;
+  overflow: clip;
+}
+.page h1,
+.page h2 {
+  letter-spacing: -0.07em;
+  line-height: 0.9;
+}
+.kicker {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  color: #2867ad;
+  margin-bottom: 1.2rem;
+}
+.hero {
+  min-height: 760px;
+  padding: 11rem 0 6rem;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(238, 243, 246, 0.96),
+      rgba(238, 243, 246, 0.68)
+    ),
+    url("https://images.unsplash.com/photo-1494412519320-aa613dfb7738?auto=format&fit=crop&w=2300&q=86")
+      center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.heroAsset {
+  position: absolute;
+  width: 62%;
+  right: -3%;
+  top: 5%;
+  opacity: 0.28;
+}
+.hero h1 {
+  font-size: clamp(4rem, 8.5vw, 9rem);
+}
+.hero h1 em {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  color: #2867ad;
+}
+.hero > .container > p:last-child {
+  max-width: 620px;
+  color: #667085;
+  margin-top: 2rem;
+}
+.story,
+.origins,
+.capabilities,
+.cta {
+  padding: clamp(6rem, 10vw, 10rem) 0;
+}
+.story {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.97)),
+    url("https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=2200&q=82")
+      center/cover no-repeat;
+}
+.storyGrid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 8vw;
+}
+.story h2,
+.titleRow h2,
+.capabilities h2,
+.cta h2 {
+  font-size: clamp(2.8rem, 4.7vw, 6.5rem);
+}
+.storyGrid > div:last-child {
+  color: #667085;
+}
+.storyGrid > div:last-child p + p {
+  margin-top: 1rem;
+}
+.storyGrid a {
+  display: inline-flex;
+  gap: 0.5rem;
+  margin-top: 1.8rem;
+  color: #101c31;
+  border-bottom: 1px solid;
+}
+.origins {
+  background:
+    linear-gradient(90deg, rgba(6, 18, 35, 0.97), rgba(6, 18, 35, 0.56)),
+    url("https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=2200&q=86")
+      center/cover no-repeat;
+  color: #fff;
+}
+.origins h2 {
+  color: #fff;
+}
+.titleRow {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+}
+.titleRow svg {
+  color: #86b6e5;
+}
+.originGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 5vw;
+  margin-top: 4rem;
+}
+.map {
+  min-height: 580px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: radial-gradient(circle, #284765, #13253c);
+  display: flex;
+}
+.map img {
+  width: 100%;
+  object-fit: contain;
+}
+.originList > div {
+  display: grid;
+  grid-template-columns: 45px 1fr;
+  padding: 1.3rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+.originList span {
+  font-size: 0.65rem;
+  color: #8192a7;
+}
+.originList p {
+  font-size: 1.05rem;
+}
+.capabilities {
+  background:
+    linear-gradient(rgba(247, 243, 234, 0.93), rgba(247, 243, 234, 0.97)),
+    url("https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=2200&q=82")
+      center/cover no-repeat;
+}
+.capGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 4rem;
+}
+.capGrid article {
+  aspect-ratio: 1.25;
+  border: 1px solid rgba(16, 28, 49, 0.15);
+  margin-right: -1px;
+  margin-bottom: -1px;
+  padding: 1.3rem;
+  background: rgba(255, 255, 255, 0.65);
+  display: flex;
+  flex-direction: column;
+}
+.capGrid span {
+  font-size: 0.65rem;
+  color: #8993a1;
+}
+.capGrid svg {
+  margin-top: auto;
+  color: #2867ad;
+}
+.capGrid h3 {
+  font-size: 1.35rem;
+  margin-top: 1rem;
+}
+.cta {
+  min-height: 650px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(220, 234, 247, 0.96),
+      rgba(220, 234, 247, 0.66)
+    ),
+    url("https://images.unsplash.com/photo-1494412519320-aa613dfb7738?auto=format&fit=crop&w=2300&q=86")
+      center/cover no-repeat;
+  display: flex;
+  align-items: center;
+}
+.cta > div > div {
+  max-width: 1000px;
+}
+.cta a {
+  display: inline-flex;
+  gap: 0.6rem;
+  align-items: center;
+  background: #101c31;
+  color: #fff;
+  padding: 1rem 1.2rem;
+  margin-top: 2rem;
+  font-size: 0.82rem;
+  font-weight: 750;
+}
+@media (max-width: 700px) {
+  .hero {
+    min-height: 670px;
+  }
+  .heroAsset {
+    width: 100%;
+    opacity: 0.4;
+  }
+  .storyGrid,
+  .originGrid {
+    grid-template-columns: 1fr;
+  }
+  .map {
+    min-height: 420px;
+  }
+  .capGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cta {
+    background-size: 110%;
+  }
+  .page h1 {
+    font-size: clamp(3.4rem, 16vw, 5.5rem);
+  }
+}

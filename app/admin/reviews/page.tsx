@@ -49,27 +49,32 @@ export default function AdminReviewsPage() {
     setLoading(false);
   };
 
-  const handleAction = useCallback(async (reviewId: string, action: "approve" | "reject") => {
-    setActionMsg("");
-    const user = auth.currentUser;
-    if (!user) return;
-    const token = await user.getIdToken();
-    const res = await fetch("/api/admin/approve-review", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ reviewId, action }),
-    });
-    const data = await res.json();
-    if (data.success) {
-      setActionMsg(`${action === "approve" ? "✓ Approved" : "✗ Rejected"}: ${reviewId}`);
-      if (auth.currentUser) fetchPending(auth.currentUser);
-    } else {
-      setActionMsg("Error — try again.");
-    }
-  }, []);
+  const handleAction = useCallback(
+    async (reviewId: string, action: "approve" | "reject") => {
+      setActionMsg("");
+      const user = auth.currentUser;
+      if (!user) return;
+      const token = await user.getIdToken();
+      const res = await fetch("/api/admin/approve-review", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ reviewId, action }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setActionMsg(
+          `${action === "approve" ? "✓ Approved" : "✗ Rejected"}: ${reviewId}`,
+        );
+        if (auth.currentUser) fetchPending(auth.currentUser);
+      } else {
+        setActionMsg("Error — try again.");
+      }
+    },
+    [],
+  );
 
   if (!ready) return null;
 
@@ -135,7 +140,13 @@ export default function AdminReviewsPage() {
                     gap: "var(--space-4)",
                   }}
                 >
-                  <div style={{ display: "flex", gap: "var(--space-3)", alignItems: "center" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "var(--space-3)",
+                      alignItems: "center",
+                    }}
+                  >
                     {r.photo ? (
                       <img
                         src={r.photo}
@@ -166,17 +177,36 @@ export default function AdminReviewsPage() {
                       </div>
                     )}
                     <div>
-                      <p style={{ margin: 0, fontWeight: 700, color: "var(--navy)", fontSize: "var(--text-sm)" }}>
+                      <p
+                        style={{
+                          margin: 0,
+                          fontWeight: 700,
+                          color: "var(--navy)",
+                          fontSize: "var(--text-sm)",
+                        }}
+                      >
                         {r.name}
                       </p>
-                      <p style={{ margin: 0, fontSize: "var(--text-xs)", color: "var(--text-muted)" }}>
+                      <p
+                        style={{
+                          margin: 0,
+                          fontSize: "var(--text-xs)",
+                          color: "var(--text-muted)",
+                        }}
+                      >
                         {[r.company, r.country].filter(Boolean).join(" · ")}
                       </p>
                     </div>
                   </div>
                   <div style={{ display: "flex", gap: 2 }}>
                     {[1, 2, 3, 4, 5].map((s) => (
-                      <span key={s} style={{ fontSize: "1.1rem", color: s <= r.rating ? "#d19900" : "var(--border)" }}>
+                      <span
+                        key={s}
+                        style={{
+                          fontSize: "1.1rem",
+                          color: s <= r.rating ? "#d19900" : "var(--border)",
+                        }}
+                      >
                         ★
                       </span>
                     ))}
@@ -197,8 +227,18 @@ export default function AdminReviewsPage() {
                   {r.text}
                 </p>
 
-                <div style={{ display: "flex", gap: "var(--space-3)", alignItems: "center", flexWrap: "wrap" }}>
-                  <button className="btn btn--primary" onClick={() => handleAction(r.id, "approve")}>
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "var(--space-3)",
+                    alignItems: "center",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <button
+                    className="btn btn--primary"
+                    onClick={() => handleAction(r.id, "approve")}
+                  >
                     ✓ Approve
                   </button>
                   <button
@@ -208,7 +248,13 @@ export default function AdminReviewsPage() {
                   >
                     ✗ Reject
                   </button>
-                  <span style={{ fontSize: "var(--text-xs)", color: "var(--text-faint)", marginLeft: "auto" }}>
+                  <span
+                    style={{
+                      fontSize: "var(--text-xs)",
+                      color: "var(--text-faint)",
+                      marginLeft: "auto",
+                    }}
+                  >
                     Doc ID: {r.id}
                   </span>
                 </div>

@@ -3,7 +3,12 @@ import { useState } from "react";
 import styles from "./Newsletter.module.css";
 
 export default function Newsletter() {
-  const [form, setForm] = useState({ name: "", company: "", email: "", message: "" });
+  const [form, setForm] = useState({
+    name: "",
+    company: "",
+    email: "",
+    message: "",
+  });
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");

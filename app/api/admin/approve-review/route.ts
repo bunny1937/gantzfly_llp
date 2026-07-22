@@ -30,7 +30,10 @@ export async function POST(req: NextRequest) {
   const adminDb = getAdminDb();
 
   if (action === "approve") {
-    await adminDb.collection("reviews").doc(reviewId).update({ approved: true });
+    await adminDb
+      .collection("reviews")
+      .doc(reviewId)
+      .update({ approved: true });
     return NextResponse.json({ success: true, status: "approved" });
   }
 

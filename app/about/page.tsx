@@ -1,149 +1,150 @@
 import Link from "next/link";
-
+import {
+  ArrowUpRight,
+  BadgeCheck,
+  Globe2,
+  MapPin,
+  PackageCheck,
+  Ship,
+  Sprout,
+} from "lucide-react";
+import styles from "./about.module.css";
 const capabilities = [
-  {
-    title: "Farm-origin sourcing",
-    text: "We source from known producing belts including Erode, Unjha, Wayanad, Guntur, Idukki, Darbhanga, Nashik, and Kashmir depending on the commodity.",
-  },
-  {
-    title: "Export-grade sorting",
-    text: "Lots are cleaned, graded, sorted, and packed to buyer specification for wholesale, distributor, and private label requirements.",
-  },
-  {
-    title: "Documentation support",
-    text: "We support COO, COA, phytosanitary, fumigation, packing list, commercial invoice, and buyer-specific export paperwork.",
-  },
-  {
-    title: "Flexible packaging",
-    text: "Bulk sacks, cartons, vacuum formats, and retail-ready packs are available depending on market, product, and MOQ.",
-  },
-  {
-    title: "Private label supply",
-    text: "For distributors and supermarket buyers, we support brand-neutral or private label packing subject to quantity and artwork approval.",
-  },
-  {
-    title: "Multi-market shipping",
-    text: "We work for buyers targeting USA, UK, Germany, France, UAE, South Africa, and Nigeria with practical trade communication.",
-  },
+  "Origin-led sourcing",
+  "Export-grade sorting",
+  "Documentation support",
+  "Packaging consultancy",
+  "Private-label development",
+  "Multi-market shipping",
 ];
-
-const buyerTypes = [
-  "Importers and sourcing teams",
-  "Distributors and regional wholesalers",
-  "Supermarket and modern trade buyers",
-  "Private label grocery brands",
-  "International retailers",
+const origins = [
+  "Erode / turmeric",
+  "Unjha / cumin",
+  "Wayanad / pepper",
+  "Guntur / chilli",
+  "Darbhanga / makhana",
+  "Nashik / raisins",
+  "Kashmir / walnuts",
 ];
-
 export default function AboutPage() {
   return (
-    <>
-      {/* Intro */}
-      <section className="section section-illus">
-        <div className="illus-bg illus-bg--tr" aria-hidden="true">
+    <main className={styles.page}>
+      <section className={styles.hero}>
+        <div className={styles.heroAsset}>
           <img
-            src="/assets/illustrations/global-trade.svg"
-            alt=""
-            width="480"
-            height="480"
-            loading="lazy"
+            src="/assets/illustrations/about-network.svg"
+            alt="India to global trade network"
           />
         </div>
-
         <div className="container">
-          <p className="eyebrow">About GiantzFly</p>
-          <h1 className="text-display">
-            Built for buyers who need export clarity, not retail noise.
+          <p className={styles.kicker}>About GiantzFly</p>
+          <h1>
+            Origin intelligence.
+            <br />
+            <em>Global execution.</em>
           </h1>
-          <p className="text-muted about-lead">
-            GiantzFly Exim LLP is a B2B export company focused on Indian spices,
-            makhana, and dry fruits for international buyers. Our role is to
-            connect origin-linked supply with clean documentation, dependable
-            packaging, and trade-ready communication.
+          <p>
+            We connect Indian products, packaging systems and qualified supply
+            with the commercial clarity international buyers need.
           </p>
-
-          <div className="about-grid">
-            <div className="card about-card">
-              <p className="eyebrow">Positioning</p>
-              <h2>From Indian Origins to Global Markets.</h2>
-              <p className="text-muted">
-                Farm-direct. Lab-certified. Export-ready for your shelf.
-              </p>
-              <hr className="divider" />
-              <p className="text-muted">
-                We are not building for Indian retail shoppers. We speak to
-                importers, distributors, supermarket buyers, and private label
-                teams who need MOQ clarity, certifications, origin traceability,
-                and shipment confidence.
-              </p>
-            </div>
-
-            <div className="card about-card">
-              <p className="eyebrow">Who we serve</p>
-              <ul className="serve-list" role="list">
-                {buyerTypes.map((item) => (
-                  <li key={item}>
-                    <span className="dot" aria-hidden="true" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
         </div>
       </section>
-
-      {/* Capabilities */}
-      <section id="capabilities" className="section section-illus">
-        <div className="illus-bg illus-bg--br" aria-hidden="true">
-          <img
-            src="/assets/illustrations/sourcing.svg"
-            alt=""
-            width="440"
-            height="360"
-            loading="lazy"
-          />
-        </div>
-
+      <section className={styles.story}>
         <div className="container">
-          <p className="eyebrow">Capabilities</p>
-          <h2 className="section-title">
-            Export operations buyers actually ask about.
-          </h2>
-
-          <div className="cap-grid">
-            {capabilities.map((item) => (
-              <div key={item.title} className="card cap-card">
-                <h3>{item.title}</h3>
-                <p className="text-muted">{item.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="section">
-        <div className="container">
-          <div className="cta-band">
-            <p className="eyebrow">Trade Enquiry</p>
-            <h2>Need origin, MOQ, and shipment clarity before you sample?</h2>
-            <p>
-              Send your requirement with destination market, product, quantity,
-              and packaging preference. We will respond with a trade-ready
-              enquiry flow.
-            </p>
-            <div className="about-cta-actions">
-              <Link href="/contact" className="btn btn--primary btn--lg">
-                Contact Us
-              </Link>
-              <Link href="/quote-cart" className="btn btn--ghost btn--lg">
-                Open Quote Cart
+          <div className={styles.storyGrid}>
+            <div>
+              <p className={styles.kicker}>What we are building</p>
+              <h2>
+                A practical bridge between a strong product and a confident
+                shipment.
+              </h2>
+            </div>
+            <div>
+              <p>
+                GiantzFly Exim LLP is a B2B export and packaging solutions
+                company serving importers, distributors, supermarket buyers,
+                manufacturers, startups and private-label teams.
+              </p>
+              <p>
+                Our work combines origin sourcing, pack engineering, vendor
+                qualification, quality coordination, regulatory support and
+                export logistics.
+              </p>
+              <Link href="/packaging">
+                Explore packaging practice <ArrowUpRight size={16} />
               </Link>
             </div>
           </div>
         </div>
       </section>
-    </>
+      <section className={styles.origins}>
+        <div className="container">
+          <div className={styles.titleRow}>
+            <div>
+              <p className={styles.kicker}>The origin map</p>
+              <h2>Source where the product has an advantage.</h2>
+            </div>
+            <MapPin size={70} />
+          </div>
+          <div className={styles.originGrid}>
+            <div className={styles.map}>
+              <img
+                src="/assets/illustrations/india-origins.svg"
+                alt="Indian sourcing origin illustration"
+              />
+            </div>
+            <div className={styles.originList}>
+              {origins.map((x, i) => (
+                <div key={x}>
+                  <span>0{i + 1}</span>
+                  <p>{x}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+      <section className={styles.capabilities}>
+        <div className="container">
+          <p className={styles.kicker}>How we work</p>
+          <h2>One operating model, six useful capabilities.</h2>
+          <div className={styles.capGrid}>
+            {capabilities.map((x, i) => {
+              const icons = [
+                Sprout,
+                PackageCheck,
+                BadgeCheck,
+                Globe2,
+                PackageCheck,
+                Ship,
+              ];
+              const I = icons[i];
+              return (
+                <article key={x}>
+                  <span>0{i + 1}</span>
+                  <I size={25} />
+                  <h3>{x}</h3>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+      <section className={styles.cta}>
+        <div className="container">
+          <div>
+            <p className={styles.kicker}>Bring us the requirement</p>
+            <h2>
+              Product, pack, market and volume.
+              <br />
+              We’ll connect the route.
+            </h2>
+            <Link href="/contact">
+              Start a trade enquiry <ArrowUpRight size={18} />
+            </Link>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }

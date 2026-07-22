@@ -1,83 +1,63 @@
-import { categories } from "@/data/products";
-import type { Product } from "@/types";
 import Link from "next/link";
-import { client } from "@/sanity/lib/client";
+import { ArrowUpRight } from "lucide-react";
 import ProductCard from "@/components/product/ProductCard";
+import { categories, products } from "@/data/products";
 import styles from "./products.module.css";
 
-export const dynamic = "force-dynamic";
-
-const query = `*[_type == "product"]{
-  id,
-  "slug": slug.current,
-  name,
-  category,
-  origin,
-  grade,
-  shortDescription,
-  description,
-  packagingOptions,
-  moq,
-  moqUnit,
-  certifications,
-  tags,
-  exportMarkets,
-  featured,
-  badge,
-  "image": image.asset->url
-}`;
-
-async function getProducts(): Promise<Product[]> {
-  return client.fetch(query);
-}
-
-export default async function ProductsPage() {
-  const products = await getProducts();
-
+const art: Record<string, string> = {
+  spices: "/assets/illustrations/product-spices.svg",
+  makhana: "/assets/illustrations/product-makhana.svg",
+  "dry-fruits": "/assets/illustrations/product-dry-fruits.svg",
+};
+export default function ProductsPage() {
   return (
-    <>
-      <section className="page-hero">
+    <main className={styles.catalog}>
+      <section className={styles.hero}>
         <div className="container">
-          <span className="eyebrow">Full Catalog</span>
-          <h1 className={`hero-title ${styles.pageTitle}`}>
-            Export catalog for international buyers.
+          <p className={styles.kicker}>
+            Export catalogue / {products.length} lines
+          </p>
+          <h1>
+            Clear specifications.
+            <br />
+            <em>Compact decisions.</em>
           </h1>
-          <p className="hero-text">
-            Browse all categories or move directly into origin-led product pages
-            with grade, MOQ, packaging, and quote actions.
+          <p>
+            Origin, grade, MOQ and packaging—without oversized cards or retail
+            checkout noise.
           </p>
         </div>
       </section>
-
-      <section className="section-sm">
+      <section className={styles.categorySection}>
         <div className="container">
-          <div className="grid-3">
-            {categories.map((category) => (
-              <div key={category.slug} className="panel">
-                <div className="kicker">{category.name}</div>
-                <h2 className={styles.categoryName}>{category.name}</h2>
-                <p className={styles.categoryDesc}>{category.description}</p>
-                <Link
-                  href={`/products/${category.slug}`}
-                  className={`btn btn-secondary ${styles.categoryLink}`}
-                >
-                  Open Category
-                </Link>
-              </div>
+          <div className={styles.categories}>
+            {categories.map((c, i) => (
+              <Link href={`/products/${c.slug}`} key={c.slug}>
+                <span>0{i + 1}</span>
+                <img src={art[c.slug]} alt="" />
+                <div>
+                  <h2>{c.name}</h2>
+                  <p>{c.description}</p>
+                </div>
+                <ArrowUpRight size={18} />
+              </Link>
             ))}
           </div>
         </div>
       </section>
-
-      <section className="section">
+      <section className={styles.products}>
         <div className="container">
-          <div className="product-grid">
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
+          <div className={styles.filterBar}>
+            <span>All export lines</span>
+            <span>{products.length} products · EXW / FOB / CIF</span>
+          </div>
+          <div className={styles.productGrid}>
+            {products.map((p) => (
+              <ProductCard key={p.id} product={p} />
             ))}
           </div>
         </div>
       </section>
-    </>
+    </main>
   );
 }

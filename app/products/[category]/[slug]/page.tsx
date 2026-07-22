@@ -2,24 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { products } from "@/data/products";
-import { client } from "@/sanity/lib/client";
-import { productBySlugQuery } from "@/sanity/lib/queries";
 import ProductQuoteActions from "@/components/product/ProductQuoteActions";
 import type { Product } from "@/types";
 import ProductImageCarousel from "./ProductImageCarousel";
 import styles from "../../products.module.css";
 
-export const dynamic = "force-dynamic";
-
-export async function generateStaticParams() {
-  const products = await client.fetch(`
-    *[_type=="product"]{
-      category,
-      "slug": slug.current
-    }
-  `);
-
-  return products;
+export function generateStaticParams() {
+  return products.map(({ category, slug }) => ({ category, slug }));
 }
 
 function getRelatedProducts(category: string, slug: string) {
@@ -34,10 +23,9 @@ export default async function ProductDetailPage({
   params: Promise<{ category: string; slug: string }>;
 }) {
   const { category, slug } = await params;
-  const product: Product = await client.fetch(productBySlugQuery, {
-    category,
-    slug,
-  });
+  const product: Product | undefined = products.find(
+    (item) => item.category === category && item.slug === slug,
+  );
   if (!product) notFound();
 
   const relatedProducts = getRelatedProducts(category, slug);

@@ -1,0 +1,686 @@
+.root {
+  --ink: #09172b;
+  --blue: #2b73be;
+  --line: rgba(9, 23, 43, 0.16);
+  overflow: clip;
+  background: #fff;
+  color: var(--ink);
+}
+.root h2 {
+  font-size: clamp(2.8rem, 4.7vw, 6.7rem);
+  line-height: 0.88;
+  letter-spacing: -0.072em;
+}
+.root h2 em {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  color: var(--blue);
+}
+.kicker {
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 1.2rem;
+}
+.head {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: 6vw;
+  align-items: end;
+  margin-bottom: 4rem;
+}
+.head > p {
+  max-width: 440px;
+  color: #647287;
+  font-size: 0.92rem;
+}
+.services,
+.materials,
+.products,
+.cta {
+  position: relative;
+  padding: clamp(6rem, 10vw, 10rem) 0;
+}
+.services {
+  background: #eef3f6;
+}
+.photoWash {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(238, 243, 246, 0.98) 0%,
+      rgba(238, 243, 246, 0.91) 52%,
+      rgba(238, 243, 246, 0.78) 100%
+    ),
+    url("https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=2200&q=86")
+      center/cover no-repeat;
+}
+.gridTexture {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(37, 99, 169, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 99, 169, 0.055) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: linear-gradient(to bottom, #000, transparent);
+}
+.serviceGrid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.serviceCard {
+  position: relative;
+  min-height: 380px;
+  padding: 1.2rem;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(9, 23, 43, 0.16);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 18px 45px rgba(9, 23, 43, 0.06);
+  transition:
+    transform 0.4s,
+    border-color 0.4s;
+}
+.serviceCard:hover {
+  transform: translateY(-10px);
+  border-color: rgba(43, 115, 190, 0.65);
+}
+.serviceCard > img {
+  position: absolute;
+  width: 72%;
+  height: 60%;
+  object-fit: contain;
+  right: 0;
+  top: 0;
+  transition: transform 0.55s;
+}
+.serviceCard:hover > img {
+  transform: translate(-5px, 7px) rotate(-2deg);
+}
+.serviceTop {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  color: var(--blue);
+}
+.serviceCard > div:last-child {
+  position: relative;
+  z-index: 2;
+  background: linear-gradient(transparent, rgba(255, 255, 255, 0.98) 22%);
+  padding-top: 3rem;
+}
+.serviceCard h3 {
+  font-size: 1.2rem;
+  letter-spacing: -0.035em;
+}
+.serviceCard p {
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: #647287;
+  margin-top: 0.65rem;
+}
+.explore {
+  position: relative;
+  z-index: 2;
+  margin-top: 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 750;
+  border-bottom: 1px solid;
+  padding-bottom: 0.3rem;
+}
+.materials {
+  background: #071426;
+  color: #fff;
+  isolation: isolate;
+}
+.materialPhoto {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.24;
+  filter: saturate(0.7);
+  transition: background-image 0.45s ease;
+}
+.materials:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(7, 20, 38, 0.98),
+    rgba(7, 20, 38, 0.78)
+  );
+  z-index: -1;
+}
+.materials h2 {
+  color: #fff;
+}
+.materials .kicker {
+  color: #87baf0;
+}
+.materials .head > p {
+  color: #a9b7c9;
+}
+.materialStage {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  min-height: 610px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.28);
+}
+.materialVisual {
+  position: relative;
+  overflow: hidden;
+     background: linear-gradient(145deg, #12304e00, #06122361);
+  backdrop-filter: blur(9px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.materialVisual:after {
+  content: "";
+  position: absolute;
+  inset: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+.orbit {
+  position: absolute;
+  width: 72%;
+  aspect-ratio: 1;
+  border: 1px dashed rgba(149, 190, 235, 0.4);
+  border-radius: 50%;
+}
+.orbit:before,
+.orbit:after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #8fb9eb;
+  top: 50%;
+}
+.orbit:before {
+  left: -5px;
+}
+.orbit:after {
+  right: -5px;
+}
+.materialVisual img {
+  width: 72%;
+  max-height: 450px;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+  mix-blend-mode: screen;
+  animation: assetIn 0.45s ease both;
+}
+@keyframes assetIn {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.assetKey {
+  position: absolute;
+  top: 42px;
+  left: 45px;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  color: #a5c5e7;
+}
+.assetCaption {
+  position: absolute;
+  left: 45px;
+  bottom: 38px;
+  z-index: 3;
+}
+.assetCaption span {
+  display: block;
+  color: #aab7c8;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+.assetCaption strong {
+  font-size: 2.5rem;
+  letter-spacing: -0.05em;
+}
+.materialList {
+  background: rgba(255, 255, 255, 0.97);
+  color: var(--ink);
+}
+.materialList button {
+  width: 100%;
+  min-height: 122px;
+  padding: 1.25rem 1.5rem;
+  display: grid;
+  grid-template-columns: 38px 1fr 22px;
+  gap: 1rem;
+  align-items: center;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  transition:
+    background 0.25s,
+    padding 0.25s;
+}
+.materialList button:hover,
+.materialList .materialActive {
+  background: #dceafa;
+  padding-left: 2rem;
+}
+.materialList button > span {
+  font-size: 0.65rem;
+  color: #8994a3;
+}
+.materialList strong {
+  display: block;
+  font-size: 1.12rem;
+}
+.materialList small {
+  display: block;
+  color: #667285;
+  font-size: 0.71rem;
+  line-height: 1.45;
+  margin-top: 0.35rem;
+}
+.products {
+  background: #f6f0e5;
+  isolation: isolate;
+}
+.productsPhoto {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(rgba(246, 240, 229, 0.92), rgba(246, 240, 229, 0.96)),
+    url("https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=2200&q=85")
+      center/cover no-repeat;
+  z-index: -1;
+}
+.products .head > a {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+  font-size: 0.82rem;
+  font-weight: 700;justify-content: flex-end;
+}
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+}
+.cinematic {
+  position: relative;
+  height: 340vh;
+  background: #07101d;
+}
+.cinematicStage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 620px;
+  overflow: hidden;
+  background: #07101d;
+}
+.cinematicScene {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  background-position: center;
+  background-size: cover;
+  color: #fff;
+  will-change: transform, opacity;
+}
+.cinematicScene:first-child {
+  opacity: 1;
+  visibility: visible;
+}
+.sceneGrid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(90deg, #000, transparent 78%);
+}
+.sceneNumber {
+  position: absolute;
+  right: 4vw;
+  top: 2vh;
+  font-size: clamp(9rem, 23vw, 24rem);
+  font-weight: 900;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.075);
+  letter-spacing: -0.1em;
+}
+.sceneContent {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 0.65fr;
+  gap: 7vw;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+.sceneCopy {
+  max-width: 690px;
+}
+.sceneCopy .kicker {
+  color: #9bc9f7;
+}
+.sceneCopy > svg {
+  color: #9bc9f7;
+  margin-bottom: 1rem;
+}
+.sceneCopy h2 {
+  color: #fff;
+  font-size: clamp(3.5rem, 6.4vw, 7rem);
+}
+.sceneCopy > p:last-child {
+  max-width: 560px;
+  color: #cfdae7;
+  font-size: clamp(0.95rem, 1.25vw, 1.15rem);
+  margin-top: 1.2rem;
+}
+.sceneDiagram {
+  justify-self: end;
+  width: min(30vw, 360px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(6, 17, 31, 0.38);
+  backdrop-filter: blur(10px);
+  padding: 1.35rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.sceneDiagram > span {
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: #a8c7e7;
+}
+.sceneBox {
+  height: 64%;
+  position: relative;
+  border: 2px solid rgba(166, 207, 246, 0.85);
+  transform: perspective(600px) rotateY(-9deg) rotateX(4deg);
+}
+.sceneBox:before {
+  content: "GIANTZFLY";
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+.sceneBox i {
+  position: absolute;
+  background: #a6cff6;
+}
+.sceneBox i:nth-child(1) {
+  left: 18%;
+  top: 0;
+  width: 2px;
+  height: 100%;
+}
+.sceneBox i:nth-child(2) {
+  left: 0;
+  top: 34%;
+  height: 2px;
+  width: 100%;
+}
+.sceneBox i:nth-child(3) {
+  right: 12%;
+  top: 12%;
+  width: 42px;
+  height: 42px;
+  border: 2px solid #a6cff6;
+  background: transparent;
+  border-radius: 50%;
+}
+.cinematicNav {
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  bottom: 2rem;
+  transform: translateX(-50%);
+  width: min(1180px, calc(100% - 2rem));
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  color: #fff;
+}
+.cinematicNav > div {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: 0.4rem;
+  align-items: center;
+}
+.cinematicNav span {
+  font-size: 0.56rem;
+  color: #9cb1c9;
+}
+.cinematicNav i {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.22);
+  overflow: hidden;
+}
+.cinematicNav b {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #9bc9f7;
+}
+.cinematicNav small {
+  grid-column: 2;
+  font-size: 0.58rem;
+  color: #c1cedd;
+  white-space: nowrap;
+}
+.scrollCue {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  z-index: 12;
+  color: #fff;
+  writing-mode: vertical-rl;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+.scrollCue span {
+  margin-top: 0.8rem;
+}
+.cta {
+  min-height: 360px;
+  padding: 3.5rem 0;
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(90deg, rgba(7, 20, 38, 0.96), rgba(7, 20, 38, 0.55));
+  color: #fff;
+  border-block: 1px solid rgba(255, 255, 255, 0.18);
+}
+.ctaBand {
+  display: grid;
+  grid-template-columns: 100px minmax(0, 1fr) 150px;
+  gap: 3rem;
+  align-items: center;
+}
+.ctaIndex {
+  align-self: start;
+  color: #9bc9f7;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+.ctaCopy p {
+  color: #b9c8d8;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.ctaCopy h2 {
+  color: #fff;
+  font-size: clamp(2.7rem, 5vw, 5.8rem);
+  line-height: 0.9;
+  margin-top: 0.8rem;
+}
+.ctaRound {
+  width: 140px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  background: #9bc9f7;
+  color: #07101d;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+.ctaRound:hover {
+  transform: rotate(-6deg) scale(1.04);
+  background: #fff;
+}
+@media (max-width: 1000px) {
+  .serviceGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .materialStage {
+    grid-template-columns: 1fr;
+  }
+  .materialVisual {
+    min-height: 520px;
+  }
+  .productGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .sceneContent {
+    grid-template-columns: 1fr 0.5fr;
+  }
+  .sceneDiagram {
+    width: 32vw;
+  }
+}
+@media (max-width: 760px) {
+  .head {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .serviceGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .serviceCard {
+    min-height: 300px;
+    padding: 0.9rem;
+  }
+  .serviceCard h3 {
+    font-size: 1rem;
+  }
+  .serviceCard p {
+    font-size: 0.7rem;
+  }
+  .materialVisual {
+    min-height: 390px;
+  }
+  .materialVisual img {
+    width: 86%;
+  }
+  .materialList button {
+    min-height: 114px;
+    padding: 1rem;
+  }
+  .productGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px;
+  }
+  .cinematic {
+    height: 300vh;
+    padding: 0;
+  }
+  .cinematicStage {
+    height: 100svh;
+    min-height: 560px;
+  }
+  .sceneContent {
+    grid-template-columns: 1fr;
+    align-content: center;
+    padding-block: 3.5rem 6rem;
+  }
+  .sceneCopy h2 {
+    font-size: clamp(3rem, 14vw, 4.5rem);
+  }
+  .sceneDiagram {
+    display: none;
+  }
+  .sceneNumber {
+    font-size: 10rem;
+  }
+  .cinematicNav {
+    bottom: 1.2rem;
+    gap: 4px;
+  }
+  .cinematicNav small {
+    display: none;
+  }
+  .scrollCue {
+    display: none;
+  }
+  .cta {
+    min-height: 420px;
+    padding: 3.5rem 0;
+  }
+  .ctaBand {
+    grid-template-columns: 1fr auto;
+    gap: 1.5rem;
+  }
+  .ctaIndex {
+    grid-column: 1 / -1;
+  }
+  .ctaRound {
+    width: 104px;
+  }
+  .root h2 {
+    font-size: clamp(2.6rem, 13vw, 4.6rem);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .orbit,
+  .materialVisual img {
+    animation: none;
+  }
+  .ctaRound {
+    transition: none;
+  }
+}

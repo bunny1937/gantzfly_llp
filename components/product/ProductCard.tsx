@@ -1,10 +1,15 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useQuoteCart } from "@/context/QuoteCartContext";
 import type { Product } from "@/types";
 import styles from "./ProductCard.module.css";
+
+const categoryArtwork: Record<string, string> = {
+  spices: "/assets/illustrations/product-spices.svg",
+  makhana: "/assets/illustrations/product-makhana.svg",
+  "dry-fruits": "/assets/illustrations/product-dry-fruits.svg",
+};
 
 export default function ProductCard({ product }: { product: Product }) {
   const { addItem, hasItem } = useQuoteCart();
@@ -14,7 +19,7 @@ export default function ProductCard({ product }: { product: Product }) {
       <div className={styles.mediaWrap}>
         {product.badge && <span className={styles.badge}>{product.badge}</span>}
         <img
-          src={product.image}
+          src={categoryArtwork[product.category] || product.image}
           alt={product.name}
           className={styles.image}
           loading="lazy"
