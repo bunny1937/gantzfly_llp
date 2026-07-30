@@ -61,7 +61,7 @@ export default function Navbar() {
       <div className={styles.inner} ref={navRef}>
         <Link href="/" className={styles.logo} aria-label="GiantzFly home">
           <img
-            src="/assets/logo.jpg"
+            src="/logo.jpeg"
             alt="GiantzFly Exim LLP"
             width={38}
             height={38}
