@@ -20,16 +20,18 @@ export default function Footer() {
             <div>
               <h4>Navigate</h4>
               <Link href="/products">Products</Link>
-              <Link href="/about">About</Link>
+              <Link href="/services">Our Services</Link>
               <Link href="/contact">Contact</Link>
               <Link href="/quote-cart">Quote Cart</Link>
             </div>
 
             <div>
               <h4>Categories</h4>
-              <Link href="/products/spices">Spices</Link>
-              <Link href="/products/makhana">Makhana</Link>
+              <Link href="/products/whole-spices">Whole Spices</Link>
+              <Link href="/products/powder-spices">Powder Spices</Link>
+              <Link href="/products/vegetables">Fresh Vegetables</Link>
               <Link href="/products/dry-fruits">Dry Fruits</Link>
+              <Link href="/products/makhana">Makhana &amp; Others</Link>
             </div>
 
             <div>

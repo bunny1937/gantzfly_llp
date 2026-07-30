@@ -217,3 +217,18 @@
     justify-content: flex-start;
   }
 }
+
+/* ---------------------------------------------------------------
+   Responsive layer: 1080 / 968 / 768 / 680 / 520 / 480 / 320 / 280
+   --------------------------------------------------------------- */
+@media (max-width: 968px) {
+  .pageGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .buyerFields {
+    grid-template-columns: 1fr;
+  }
+}

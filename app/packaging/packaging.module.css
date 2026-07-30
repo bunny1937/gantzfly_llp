@@ -418,3 +418,64 @@
     font-size: clamp(2.7rem, 13vw, 4.5rem);
   }
 }
+
+/* ---------------------------------------------------------------
+   Responsive layer: 1080 / 968 / 768 / 680 / 520 / 480 / 320 / 280
+   --------------------------------------------------------------- */
+@media (max-width: 1080px) {
+  .consultancyGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .industryGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 968px) {
+  .split {
+    grid-template-columns: 1fr;
+  }
+
+  .consultancyGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .exportGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .industryGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 680px) {
+  .consultancyGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .industryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .supportCard {
+    grid-template-columns: 1fr;
+  }
+
+  .supportItems {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 320px) {
+  .consultancyGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .industryGrid {
+    grid-template-columns: 1fr;
+  }
+}

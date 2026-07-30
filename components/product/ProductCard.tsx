@@ -6,9 +6,11 @@ import type { Product } from "@/types";
 import styles from "./ProductCard.module.css";
 
 const categoryArtwork: Record<string, string> = {
-  spices: "/assets/illustrations/product-spices.svg",
-  makhana: "/assets/illustrations/product-makhana.svg",
-  "dry-fruits": "/assets/illustrations/product-dry-fruits.svg",
+  "whole-spices": "/assets/categories/whole-spices.png",
+  "powder-spices": "/assets/categories/powder-spices.png",
+  vegetables: "/assets/categories/vegetables.png",
+  "dry-fruits": "/assets/categories/dry-fruits.png",
+  makhana: "/assets/categories/makhana.png",
 };
 
 export default function ProductCard({ product }: { product: Product }) {
@@ -19,13 +21,24 @@ export default function ProductCard({ product }: { product: Product }) {
       <div className={styles.mediaWrap}>
         {product.badge && <span className={styles.badge}>{product.badge}</span>}
         <img
-          src={categoryArtwork[product.category] || product.image}
+          src={product.image || categoryArtwork[product.category]}
           alt={product.name}
           className={styles.image}
           loading="lazy"
           width={1200}
           height={900}
         />
+        {product.imageSecondary && (
+          <img
+            src={product.imageSecondary}
+            alt=""
+            aria-hidden="true"
+            className={styles.imageAlt}
+            loading="lazy"
+            width={1200}
+            height={900}
+          />
+        )}
       </div>
 
       <div className={styles.body}>

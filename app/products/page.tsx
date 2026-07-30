@@ -5,10 +5,13 @@ import { categories, products } from "@/data/products";
 import styles from "./products.module.css";
 
 const art: Record<string, string> = {
-  spices: "/assets/illustrations/product-spices.svg",
-  makhana: "/assets/illustrations/product-makhana.svg",
-  "dry-fruits": "/assets/illustrations/product-dry-fruits.svg",
+  "whole-spices": "/assets/categories/whole-spices.png",
+  "powder-spices": "/assets/categories/powder-spices.png",
+  vegetables: "/assets/categories/vegetables.png",
+  "dry-fruits": "/assets/categories/dry-fruits.png",
+  makhana: "/assets/categories/makhana.png",
 };
+
 export default function ProductsPage() {
   return (
     <main className={styles.catalog}>

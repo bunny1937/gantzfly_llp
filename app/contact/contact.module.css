@@ -220,3 +220,22 @@
     box-shadow: 8px 8px 0 rgba(196, 220, 241, 0.85);
   }
 }
+
+/* ---------------------------------------------------------------
+   Responsive layer: 1080 / 968 / 768 / 680 / 520 / 480 / 320 / 280
+   --------------------------------------------------------------- */
+@media (max-width: 968px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .contactCards {
+    grid-template-columns: 1fr;
+  }
+
+  .two {
+    grid-template-columns: 1fr;
+  }
+}

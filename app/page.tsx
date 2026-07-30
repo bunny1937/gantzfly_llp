@@ -1,5 +1,8 @@
 import Link from "next/link";
-import PackagingExperience from "@/components/sections/PackagingExperience";
+import GlobalReach from "@/components/sections/GlobalReach";
+import CategoryStrip from "@/components/sections/CategoryStrip";
+import Certifications from "@/components/sections/Certifications";
+import Newsletter from "@/components/sections/Newsletter";
 import styles from "./home.module.css";
 
 export default function HomePage() {
@@ -47,7 +50,11 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      <PackagingExperience />
+
+      <GlobalReach />
+      <CategoryStrip />
+      <Certifications />
+      <Newsletter />
     </>
   );
 }

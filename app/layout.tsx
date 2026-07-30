@@ -3,19 +3,13 @@ import "./globals.css";
 import { QuoteCartProvider } from "@/context/QuoteCartContext";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { Noto_Sans, Playfair_Display, Figtree } from "next/font/google";
+import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 
-const playfairDisplayHeading = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-heading",
-  preload: false,
-});
-
-const figtree = Figtree({
+const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
-  preload: false,
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -31,14 +25,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={cn(
-        "font-sans",
-        figtree.variable,
-        playfairDisplayHeading.variable,
-      )}
-    >
+    <html lang="en" className={cn("font-sans", inter.variable)}>
       <body>
         <QuoteCartProvider>
           <Navbar />

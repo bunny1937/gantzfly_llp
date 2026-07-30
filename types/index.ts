@@ -1,4 +1,5 @@
-export type ProductCategory = "spices" | "makhana" | "dry-fruits";
+export type ProductCategory =
+  "whole-spices" | "powder-spices" | "vegetables" | "dry-fruits" | "makhana";
 
 export interface Product {
   id: string;
@@ -17,7 +18,15 @@ export interface Product {
   exportMarkets: string[];
   featured: boolean;
   image: string;
+  /** Second photograph, shown on card hover and in the detail gallery. */
+  imageSecondary?: string;
   badge?: string;
+  /** Major production area, shown in the origin table. */
+  productionArea?: string;
+  /** Export potential, 1-5 stars. */
+  exportPotential?: number;
+  /** Value addition options offered on this line. */
+  valueAddition?: string;
 }
 
 export interface QuoteItem {

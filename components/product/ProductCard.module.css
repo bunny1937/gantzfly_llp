@@ -39,8 +39,30 @@
   object-fit: cover;
   transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
 }
+.imageAlt {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition:
+    opacity 0.45s ease,
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
 .card:hover .image {
   transform: scale(1.04);
+}
+.card:hover .imageAlt,
+.card:focus-within .imageAlt {
+  opacity: 1;
+  transform: scale(1.04);
+}
+@media (hover: none) {
+  .imageAlt {
+    display: none;
+  }
 }
 .body {
   padding: 0.8rem;
@@ -141,5 +163,18 @@
   }
   .image {
     aspect-ratio: 1.05/1;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Responsive layer: 1080 / 968 / 768 / 680 / 520 / 480 / 320 / 280
+   --------------------------------------------------------------- */
+@media (max-width: 520px) {
+  .detailGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    grid-template-columns: 1fr;
   }
 }

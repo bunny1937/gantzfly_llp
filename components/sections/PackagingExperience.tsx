@@ -360,10 +360,7 @@ export default function PackagingExperience() {
           <div className={styles.head} data-rise>
             <div>
               <p className={styles.kicker}>Export catalogue</p>
-              <h2>
-                Compact cards.
-                Useful decisions.
-              </h2>
+              <h2>Compact cards. Useful decisions.</h2>
             </div>
             <Link href="/products">
               Open all products <ArrowUpRight size={16} />

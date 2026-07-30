@@ -18,6 +18,7 @@ export default async function CategoryPage({
   const meta = getCategoryMeta(category);
   if (!meta) notFound();
   const items = products.filter((item) => item.category === category);
+  const withOrigin = items.filter((item) => item.exportPotential);
   return (
     <>
       <section className="page-hero">
@@ -44,6 +45,41 @@ export default async function CategoryPage({
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
+
+          {withOrigin.length > 0 && (
+            <div className={styles.originTableWrap}>
+              <h2 className={styles.originTableTitle}>
+                Production areas and value addition
+              </h2>
+              <div className={styles.originTableScroll}>
+                <table className={styles.originTable}>
+                  <thead>
+                    <tr>
+                      <th>Product</th>
+                      <th>Major production area</th>
+                      <th>Export potential</th>
+                      <th>Value addition</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {withOrigin.map((product) => (
+                      <tr key={product.id}>
+                        <td>{product.name}</td>
+                        <td>{product.productionArea ?? product.origin}</td>
+                        <td
+                          aria-label={`${product.exportPotential} out of 5`}
+                          className={styles.originStars}
+                        >
+                          {"\u2605".repeat(product.exportPotential ?? 0)}
+                        </td>
+                        <td>{product.valueAddition}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
         </div>
       </section>
     </>

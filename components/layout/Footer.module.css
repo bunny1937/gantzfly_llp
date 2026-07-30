@@ -94,3 +94,22 @@
     padding-top: 4rem;
   }
 }
+
+/* ---------------------------------------------------------------
+   Responsive layer: 1080 / 968 / 768 / 680 / 520 / 480 / 320 / 280
+   --------------------------------------------------------------- */
+@media (max-width: 968px) {
+  .top {
+    grid-template-columns: 1fr;
+  }
+
+  .links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .links {
+    grid-template-columns: 1fr;
+  }
+}
